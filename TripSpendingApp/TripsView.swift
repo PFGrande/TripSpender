@@ -14,7 +14,7 @@ struct TripsView: View {
                 Text("navbar")
                     .font(.title)
                     .padding()
-
+                
                 NavigationLink(destination: CreateTripView()) {
                     Text("Detail View")
                         .font(.headline)
@@ -29,6 +29,7 @@ struct TripsView: View {
         .toolbarBackground(Color.gray.opacity(0.9), for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarColorScheme(.dark, for: .navigationBar)
+        .navigationBarBackButtonHidden()
         
     }
 }
