@@ -5,52 +5,53 @@
 //  Created by Pedro F. Grande on 12/12/24.
 //
 
+// features ideas:
+// add feature using map to estimate the gas price for the trip
+
 import SwiftUI
 
 struct LoginView: View {
     var body: some View {
-        VStack {
+        NavigationView {
             VStack {
-                Image("logo")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .foregroundColor(.accentColor)
-                
-                Button(
-                    action: {
-                        // did tap
-                    },
-                    label: {
-                        Text("Log in")
-                            .padding()
-                            .frame(width: 300, height: 80)
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(20)
-                            .shadow(color: .gray, radius: 5, x: 0, y: 5)
-                    }
-                )
-                
-                Button(
-                    action: {
-                        // did tap
-                    },
-                    label: {
-                        Text("Register")
-                            .padding()
-                            .frame(width: 300, height: 80)
-                            .background(Color.orange)
-                            .foregroundColor(.white)
-                            .cornerRadius(20)
-                            .shadow(color: .gray, radius: 5, x: 0, y: 5)
-                    }
-                )
-                
-                Button(
-                    action: {
-                        // did tap
-                    },
-                    label: {
+                VStack {
+                    Image("logo")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(.accentColor)
+                    
+                    Button(
+                        action: {
+                            // did tap
+                        },
+                        label: {
+                            Text("Log in")
+                                .padding()
+                                .frame(width: 300, height: 80)
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(20)
+                                .shadow(color: .gray, radius: 5, x: 0, y: 5)
+                        }
+                    )
+                    
+                    Button(
+                        action: {
+                            // did tap
+                        },
+                        label: {
+                            Text("Register")
+                                .padding()
+                                .frame(width: 300, height: 80)
+                                .background(Color.orange)
+                                .foregroundColor(.white)
+                                .cornerRadius(20)
+                                .shadow(color: .gray, radius: 5, x: 0, y: 5)
+                        }
+                    )
+                    
+                    // reminder: replace all buttons
+                    NavigationLink(destination: TripsView()) {
                         Text("Offline Mode")
                             .padding()
                             .frame(width: 300, height: 80)
@@ -59,20 +60,26 @@ struct LoginView: View {
                             .cornerRadius(20)
                             .shadow(color: .gray, radius: 5, x: 0, y: 5)
                     }
-                )
-            }
-            
-            
-            HStack {
-                Image("spendee")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                     
+                    
+                }
                 
-                Image("spender")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            }
-            .frame(height: 200)
+                HStack {
+                    Image("spendee")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    
+                    Image("spender")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                }
+                .frame(height: 200)
+            
+        }
+        
+            
+            
+            
         }
         .padding()
     }
