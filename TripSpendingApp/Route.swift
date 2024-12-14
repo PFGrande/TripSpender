@@ -6,15 +6,20 @@
 //
 
 import SwiftUI
+import Foundation
 
-struct Route: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct Route_Previews: PreviewProvider {
-    static var previews: some View {
-        Route()
+enum Route: Hashable, Equatable {
+    case tripsview
+    case registrationview
+    case loginview
+    
+    // case tripdetailview(TripInfo)
+    // case profileview(User)
+    var description: String { // for debugging
+        switch self {
+        case .registrationview: return "Registration View"
+        case .loginview: return "Login View"
+        case .tripsview: return "Trips View"
+        }
     }
 }
