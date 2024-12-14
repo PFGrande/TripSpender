@@ -20,21 +20,15 @@ struct HomeView: View {
                         .aspectRatio(contentMode: .fit)
                         .foregroundColor(.accentColor)
                     
-                    // placeholder
-                    Button(
-                        action: {
-                            // did tap
-                        },
-                        label: {
-                            Text("Log in")
-                                .padding()
-                                .frame(width: 300, height: 80)
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(20)
-                                .shadow(color: .gray, radius: 5, x: 0, y: 5)
-                        }
-                    )
+                    NavigationLink(destination: LoginView()) {
+                        Text("Log in")
+                            .padding()
+                            .frame(width: 300, height: 80)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(20)
+                            .shadow(color: .gray, radius: 5, x: 0, y: 5)
+                    }
                     
                     // register acc
                     NavigationLink(destination: RegistrationView()) {

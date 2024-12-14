@@ -31,6 +31,7 @@ struct RegistrationView: View {
                 Text("Register Account")
                     .multilineTextAlignment(.center)
                     .font(.largeTitle)
+                    .fontWeight(.bold)
                     .frame(width: 200)
                     .foregroundColor(Color.green)
                 //                .foregroundStyle(.blue.gradient) didn't do anything :(
@@ -39,19 +40,19 @@ struct RegistrationView: View {
                 
                 TextField("Username", text: $username)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
+                    .padding(.horizontal)
                 
                 TextField("Email", text: $email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
+                    .padding(.horizontal)
                 
                 SecureField("Password", text: $password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
+                    .padding(.horizontal)
                 
                 SecureField("Confirm Password", text: $confirmPass)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
+                    .padding(.horizontal)
                 
                 Button(
                     action: {
@@ -74,16 +75,12 @@ struct RegistrationView: View {
                         
                     })
                 .font(.headline)
-                .padding()
+                .frame(maxWidth: .infinity, minHeight: 50)
                 .background(Color.orange)
                 .foregroundColor(.white)
                 .cornerRadius(10)
-                .padding(.top, 40)
-                
-                NavigationLink() {
-                    
-                }
-                
+                .padding(.top, 30)
+                .padding(.horizontal)
                 
                 // generated using chatgpt
                 if !errorMessage.isEmpty {
@@ -107,7 +104,7 @@ struct RegistrationView: View {
             
         }
 //        .navigationBarBackButtonHidden(true)
-        .navigationBarBackButtonHidden(true)
+//        .navigationBarBackButtonHidden(!isRegistered)
         
     }
 }
