@@ -22,7 +22,7 @@ struct ContentView: View {
             }.navigationDestination(for: Route.self) { route in
                 switch route {
                 case .tripsview:
-                    TripsView()
+                    TripsView().navigationBarBackButtonHidden()
                 case .registrationview:
                     RegistrationView()
                 case .loginview:
