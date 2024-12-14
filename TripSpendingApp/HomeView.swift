@@ -10,7 +10,7 @@
 
 import SwiftUI
 
-struct LoginView: View {
+struct HomeView: View {
     var body: some View {
         NavigationView {
             VStack {
@@ -35,20 +35,30 @@ struct LoginView: View {
                         }
                     )
                     
-                    Button(
-                        action: {
-                            // did tap
-                        },
-                        label: {
-                            Text("Register")
-                                .padding()
-                                .frame(width: 300, height: 80)
-                                .background(Color.orange)
-                                .foregroundColor(.white)
-                                .cornerRadius(20)
-                                .shadow(color: .gray, radius: 5, x: 0, y: 5)
-                        }
-                    )
+//                    Button(
+//                        action: {
+//                            // did tap
+//                        },
+//                        label: {
+//                            Text("Register")
+//                                .padding()
+//                                .frame(width: 300, height: 80)
+//                                .background(Color.orange)
+//                                .foregroundColor(.white)
+//                                .cornerRadius(20)
+//                                .shadow(color: .gray, radius: 5, x: 0, y: 5)
+//                        }
+//                    )
+                    
+                    NavigationLink(destination: RegistrationView()) {
+                        Text("Register")
+                            .padding()
+                            .frame(width: 300, height: 80)
+                            .background(Color.orange)
+                            .foregroundColor(.white)
+                            .cornerRadius(20)
+                            .shadow(color: .gray, radius: 5, x: 0, y: 5)
+                    }
                     
                     // reminder: replace all buttons
                     NavigationLink(destination: TripsView()) {
@@ -87,6 +97,6 @@ struct LoginView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        HomeView()
     }
 }

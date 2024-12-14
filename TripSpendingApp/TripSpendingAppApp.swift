@@ -12,16 +12,16 @@ import FirebaseCore
 // https://console.firebase.google.com/u/0/project/tripspendingapp/overview
 class AppDelegate: NSObject, UIApplicationDelegate {
 
-  func application(_ application: UIApplication,
+    func application
+        (
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
+        ) -> Bool {
+            FirebaseApp.configure()
 
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+            return true
 
-    FirebaseApp.configure()
-
-    return true
-
-  }
-
+        }
 }
 
 
@@ -34,7 +34,7 @@ struct TripSpendingAppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            HomeView()
         }
     }
 }
