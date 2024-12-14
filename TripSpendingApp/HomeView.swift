@@ -8,76 +8,72 @@
 // features ideas:
 // add feature using map to estimate the gas price for the trip
 
+// navigation overhaul references: https://www.youtube.com/watch?v=g4HoFkd_I2Q&list=PLPNCkYpwTr1SKK8zrqRBJC71c4MO9yTIM&index=10
+// the lecture covers how NagivationStacks and NavigationPaths are used instead of navigation links
+// professor mentioned distaste for the navigation links, and i have realized after multple attempts to remove the
+// back button, that I don't really know what the navigation stack is doing when I use navigation views.
+// navigation paths should be more straightforward.
+
+import Foundation
+
 import SwiftUI
 
+// code from lecture https://www.youtube.com/watch?v=g4HoFkd_I2Q&list=PLPNCkYpwTr1SKK8zrqRBJC71c4MO9yTIM&index=10
 struct HomeView: View {
+    
+    var onNavigation: (Route) -> Void
+    
     var body: some View {
-        NavigationView {
+        VStack {
             VStack {
-                VStack {
-                    Image("logo")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .foregroundColor(.accentColor)
+                Image("logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(.accentColor)
+
+                Button(action: {
+                    onNavigation(.loginview)
+                }, label: {
+                    renderHomeMenuButtonText(color: Color.blue, text: "Log in")
+                })
+
+                // register acc
+                Button(action: {
+                    onNavigation(.registrationview)
                     
-                    NavigationLink(destination: LoginView()) {
-                        Text("Log in")
-                            .padding()
-                            .frame(width: 300, height: 80)
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(20)
-                            .shadow(color: .gray, radius: 5, x: 0, y: 5)
-                    }
-                    
-                    // register acc
-                    NavigationLink(destination: RegistrationView()) {
-                        Text("Register")
-                            .padding()
-                            .frame(width: 300, height: 80)
-                            .background(Color.orange)
-                            .foregroundColor(.white)
-                            .cornerRadius(20)
-                            .shadow(color: .gray, radius: 5, x: 0, y: 5)
-                    }
-                    
-                    // no login needed
-                    NavigationLink(destination: TripsView()) {
-                        Text("Offline Mode")
-                            .padding()
-                            .frame(width: 300, height: 80)
-                            .background(Color.red)
-                            .foregroundColor(.white)
-                            .cornerRadius(20)
-                            .shadow(color: .gray, radius: 5, x: 0, y: 5)
-                    }
-                     
-                    
-                }
-                
-                HStack {
-                    Image("spendee")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                    
-                    Image("spender")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                }
-                .frame(height: 200)
-            
+                }, label: {
+                    renderHomeMenuButtonText(color: Color.orange, text: "Register")
+                })
+
+                // no login needed
+                Button(action: {
+                    onNavigation(.tripsview)
+                }, label: {
+                    renderHomeMenuButtonText(color: Color.red, text: "Offline Mode")
+                })
+
+            }
+
+            HStack {
+                Image("spendee")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+
+                Image("spender")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            }
+            .frame(height: 200)
         }
-        
-            
-            
-            
-        }
-        .padding()
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-    }
+func renderHomeMenuButtonText(color: Color, text: String) -> some View {
+    Text(text)
+        .padding()
+        .frame(width: 300, height: 80)
+        .background(color)
+        .foregroundColor(.white)
+        .cornerRadius(20)
+        .shadow(color: .gray, radius: 5, x: 0, y: 5)
 }

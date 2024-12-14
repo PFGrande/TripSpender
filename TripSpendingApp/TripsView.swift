@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct TripsView: View {
+//    @Binding
+//    var path: [Route]
+    
     var body: some View {
-//        NavigationStack {
-//            VStack {
-//                Text("navbar")
-//                    .font(.title)
-//                    .padding()
-//
+            VStack {
+                Text("navbar")
+                    .font(.title)
+                    .padding()
+                
+                
+            
 //                NavigationLink(destination: CreateTripView()) {
 //                    Text("Detail View")
 //                        .font(.headline)
@@ -23,30 +27,8 @@ struct TripsView: View {
 //                        .foregroundColor(.white)
 //                        .cornerRadius(10)
 //                }
-//            }
-//        }
-//        .navigationTitle("Trips")
-//        .toolbarBackground(Color.gray.opacity(0.9), for: .navigationBar)
-//        .toolbarBackground(.visible, for: .navigationBar)
-//        .toolbarColorScheme(.dark, for: .navigationBar)
-//        .navigationBarBackButtonHidden()
-        NavigationView {
-            VStack {
-                Text("navbar")
-                    .font(.title)
-                    .padding()
-            
-                NavigationLink(destination: CreateTripView()) {
-                    Text("Detail View")
-                        .font(.headline)
-                        .padding()
-                        .background(Color.orange)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
             }
-        }
-        .navigationBarBackButtonHidden(true) // im so dumb
+
     }
 }
 
