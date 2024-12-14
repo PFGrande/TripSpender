@@ -24,6 +24,15 @@ struct RegistrationView: View {
     
     var body: some View {
         VStack {
+            Text("Register Account")
+                .multilineTextAlignment(.center)
+                .font(.largeTitle)
+                .frame(width: 200)
+                .foregroundColor(Color.green)
+//                .foregroundStyle(.blue.gradient) didn't do anything :(
+//                .padding()
+                .padding(.bottom, 50)
+            
             TextField("Username", text: $username)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
@@ -40,23 +49,33 @@ struct RegistrationView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
 
-            Button("Register") {
-                if password == confirmPass {
-                    register(email: email, password: password, username: username) { error in
-                        if let error = error {
-                            errorMessage = error.localizedDescription
+            Button(
+                action: {
+                    if password == confirmPass {
+                        register(email: email, password: password, username: username) { error in
+                            if let error = error {
+                                errorMessage = error.localizedDescription
+                            }
+                            else {
+                                errorMessage = "Registration successful!"
+                            }
                         }
-                        else {
-                            errorMessage = "Registration successful!"
-                        }
+                    } else {
+                        errorMessage = "passwords must match"
                     }
-                } else {
-                    errorMessage = "passwords must match"
-                }
-                
-            }
-            .padding()
-
+                },
+                label: {
+                    Text("Register")
+                        
+                })
+                    .font(.headline)
+                    .padding()
+                    .background(Color.orange)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    .padding(.top, 40)
+            
+            // generated using chatgpt
             if !errorMessage.isEmpty {
                 Text(errorMessage)
                     .foregroundColor(errorMessage.contains("successful") ? .green : .red)

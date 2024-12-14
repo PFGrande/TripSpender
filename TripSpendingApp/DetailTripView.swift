@@ -9,9 +9,11 @@ import SwiftUI
 
 struct DetailTripView: View {
     var body: some View {
-        NavigationStack {
+        NavigationStack { // if i want a back button here, keep the Navigation stack
+            // if not, replace it with a NavitationView
+            // NavigationView will reset the navigation hierarchy
             Text("detail view test")
-        }.navigationBarBackButtonHidden()
+        }
         
     }
 }
