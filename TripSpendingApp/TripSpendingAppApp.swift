@@ -34,7 +34,7 @@ struct TripSpendingAppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            ContentView()
         }
     }
 }

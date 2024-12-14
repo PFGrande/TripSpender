@@ -95,9 +95,9 @@ struct RegistrationView: View {
                 // soon to be deprecated constructor...
                 // code referenced:
                 // https://stackoverflow.com/questions/65244680/how-to-make-a-swiftui-navigationlink-conditional-based-on-an-optional-object
-                NavigationLink(destination: TripsView().navigationBarBackButtonHidden(true), isActive: $isRegistered) {
-                    EmptyView()
-                }
+//                NavigationLink(destination: TripsView().navigationBarBackButtonHidden(true), isActive: $isRegistered) {
+//                    EmptyView()
+//                }
              
             }
             .padding()
