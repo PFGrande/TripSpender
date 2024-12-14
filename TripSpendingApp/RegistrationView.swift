@@ -25,84 +25,85 @@ struct RegistrationView: View {
     private var isRegistered: Bool = false
     
     var body: some View {
-        NavigationView {
+        VStack {
+            Text("Register Account")
+                .multilineTextAlignment(.center)
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .frame(width: 200)
+                .foregroundColor(Color.green)
+            //                .foregroundStyle(.blue.gradient) didn't do anything :(
+            //                .padding()
+                .padding(.bottom, 50)
             
-            VStack {
-                Text("Register Account")
-                    .multilineTextAlignment(.center)
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .frame(width: 200)
-                    .foregroundColor(Color.green)
-                //                .foregroundStyle(.blue.gradient) didn't do anything :(
-                //                .padding()
-                    .padding(.bottom, 50)
-                
-                TextField("Username", text: $username)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.horizontal)
-                
-                TextField("Email", text: $email)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.horizontal)
-                
-                SecureField("Password", text: $password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.horizontal)
-                
-                SecureField("Confirm Password", text: $confirmPass)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.horizontal)
-                
-                Button(
-                    action: {
-                        if password == confirmPass {
-                            register(email: email, password: password, username: username) { error in
-                                if let error = error {
-                                    errorMessage = error.localizedDescription
-                                }
-                                else {
-                                    errorMessage = "Registration successful!"
-                                    isRegistered = true
-                                }
-                            }
-                        } else {
-                            errorMessage = "passwords must match"
-                        }
-                    },
-                    label: {
-                        Text("Register")
-                        
-                    })
-                .font(.headline)
-                .frame(maxWidth: .infinity, minHeight: 50)
-                .background(Color.orange)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .padding(.top, 30)
+            TextField("Username", text: $username)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
-                
-                // generated using chatgpt
-                if !errorMessage.isEmpty {
-                    Text(errorMessage)
-                        .foregroundColor(errorMessage.contains("successful") ? .green : .red)
-                        .padding()
+            
+            TextField("Email", text: $email)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding(.horizontal)
+            
+            SecureField("Password", text: $password)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding(.horizontal)
+            
+            SecureField("Confirm Password", text: $confirmPass)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding(.horizontal)
+            
+            Button(
+                action: {
+                    if password == confirmPass {
+                        register(email: email, password: password, username: username) { error in
+                            if let error = error {
+                                errorMessage = error.localizedDescription
+                            }
+                            else {
+                                errorMessage = "Registration successful!"
+                                isRegistered = true
+                            }
+                        }
+                    } else {
+                        errorMessage = "passwords must match"
+                    }
+                },
+                label: {
+                    Text("Register")
                     
-                }
+                })
+            .font(.headline)
+            .frame(maxWidth: .infinity, minHeight: 50)
+            .background(Color.orange)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .padding(.top, 30)
+            .padding(.horizontal)
+            
+            // generated using chatgpt
+            if !errorMessage.isEmpty {
+                Text(errorMessage)
+                    .foregroundColor(errorMessage.contains("successful") ? .green : .red)
+                    .padding()
                 
-                
-                
-                // soon to be deprecated constructor...
-                // code referenced:
-                // https://stackoverflow.com/questions/65244680/how-to-make-a-swiftui-navigationlink-conditional-based-on-an-optional-object
+            }
+            
+            
+            
+//             soon to be deprecated constructor...
+//             code referenced:
+//             https://stackoverflow.com/questions/65244680/how-to-make-a-swiftui-navigationlink-conditional-based-on-an-optional-object
 //                NavigationLink(destination: TripsView().navigationBarBackButtonHidden(true), isActive: $isRegistered) {
 //                    EmptyView()
 //                }
-             
-            }
-            .padding()
-            
+         
         }
+            .padding()
+            .navigationDestination(isPresented: $isRegistered) {
+                TripsView().navigationBarBackButtonHidden()
+            }
+            
+        
 //        .navigationBarBackButtonHidden(true)
 //        .navigationBarBackButtonHidden(!isRegistered)
         

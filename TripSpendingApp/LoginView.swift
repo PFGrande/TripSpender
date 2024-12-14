@@ -61,10 +61,10 @@ struct LoginView: View {
 
             Spacer()
         }
-        .padding()
-                .navigationDestination(isPresented: $isLoggedIn) {
-                    TripsView()
-                }
+            .padding()
+            .navigationDestination(isPresented: $isLoggedIn) {
+                TripsView().navigationBarBackButtonHidden()
+            }
         
     }
 }
