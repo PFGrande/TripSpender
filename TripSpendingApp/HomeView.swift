@@ -20,6 +20,7 @@ struct HomeView: View {
                         .aspectRatio(contentMode: .fit)
                         .foregroundColor(.accentColor)
                     
+                    // placeholder
                     Button(
                         action: {
                             // did tap
@@ -35,21 +36,7 @@ struct HomeView: View {
                         }
                     )
                     
-//                    Button(
-//                        action: {
-//                            // did tap
-//                        },
-//                        label: {
-//                            Text("Register")
-//                                .padding()
-//                                .frame(width: 300, height: 80)
-//                                .background(Color.orange)
-//                                .foregroundColor(.white)
-//                                .cornerRadius(20)
-//                                .shadow(color: .gray, radius: 5, x: 0, y: 5)
-//                        }
-//                    )
-                    
+                    // register acc
                     NavigationLink(destination: RegistrationView()) {
                         Text("Register")
                             .padding()
@@ -60,7 +47,7 @@ struct HomeView: View {
                             .shadow(color: .gray, radius: 5, x: 0, y: 5)
                     }
                     
-                    // reminder: replace all buttons
+                    // no login needed
                     NavigationLink(destination: TripsView()) {
                         Text("Offline Mode")
                             .padding()

@@ -9,12 +9,33 @@ import SwiftUI
 
 struct TripsView: View {
     var body: some View {
-        NavigationStack {
+//        NavigationStack {
+//            VStack {
+//                Text("navbar")
+//                    .font(.title)
+//                    .padding()
+//
+//                NavigationLink(destination: CreateTripView()) {
+//                    Text("Detail View")
+//                        .font(.headline)
+//                        .padding()
+//                        .background(Color.orange)
+//                        .foregroundColor(.white)
+//                        .cornerRadius(10)
+//                }
+//            }
+//        }
+//        .navigationTitle("Trips")
+//        .toolbarBackground(Color.gray.opacity(0.9), for: .navigationBar)
+//        .toolbarBackground(.visible, for: .navigationBar)
+//        .toolbarColorScheme(.dark, for: .navigationBar)
+//        .navigationBarBackButtonHidden()
+        NavigationView {
             VStack {
                 Text("navbar")
                     .font(.title)
                     .padding()
-                
+            
                 NavigationLink(destination: CreateTripView()) {
                     Text("Detail View")
                         .font(.headline)
@@ -25,12 +46,7 @@ struct TripsView: View {
                 }
             }
         }
-        .navigationTitle("Trips")
-        .toolbarBackground(Color.gray.opacity(0.9), for: .navigationBar)
-        .toolbarBackground(.visible, for: .navigationBar)
-        .toolbarColorScheme(.dark, for: .navigationBar)
-        .navigationBarBackButtonHidden()
-        
+        .navigationBarBackButtonHidden(true) // im so dumb
     }
 }
 
