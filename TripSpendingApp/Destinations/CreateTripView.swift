@@ -73,7 +73,7 @@ struct CreateTripView: View {
             Button("Create Trip") {
 //                destination: String = "", tripThumbnailUrl: String = "", contributorIds: [String] = []
                 if (!destination.isEmpty && !tripThumbnailUrl.isEmpty) {
-                    let newTrip = TripInfo(destination: destination, tripThumbnailUrl: tripThumbnailUrl, contributorIds: contributorIds)
+                    let newTrip = TripInfo(id: "placeholder",destination: destination, tripThumbnailUrl: tripThumbnailUrl, contributorIds: contributorIds)
                     newTrip.postTripInfo()
                     submittedTrip = true
                 } else {

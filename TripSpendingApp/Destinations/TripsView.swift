@@ -36,9 +36,27 @@ struct TripsView: View {
                     }
                 )
                 
-                List {
+//                if tripsList.isEmpty {
+//                    if !errorMessage.isEmpty {
+//                        Text(errorMessage)
+//                            .foregroundColor(.red)
+//                    } else {
+//                        Text("Loading trips...")
+//                            .foregroundColor(.gray)
+//                    }
+//                } else {
+//                    renderUserTrips()
+//                }
+                
+                
+                
+                
+                renderUserTrips()
                     
-                }
+                
+                    
+                
+                
                 
                 if !errorMessage.isEmpty {
                     Text(errorMessage)
@@ -80,15 +98,23 @@ struct TripsView: View {
                 
                 if docRef.documents.isEmpty {
                     errorMessage = "you have no trips"
+                    
+//                    // used chatgpt for this code snippet, it should apparently wait for the
+//                    // ui thread to reflect changes before this function is done
+//                    await MainActor.run {
+//                        errorMessage = "You have no trips"
+//                    }
                     return
                 } else {
+                    var fetchedTrips: [TripInfo] = []
+                    
                     // referenced https://firebase.google.com/docs/firestore/query-data/get-data#swift_3
                     for doc in docRef.documents { // iterate through the query collection
                         print("---docId: \(doc.documentID)---")
                         print("DATA: ")
                         print(doc.data())
                         if !doc.data().isEmpty { // probably redundant check
-                            var tripElement = TripInfo()
+                            var tripElement = TripInfo(id: doc.documentID)
                             let dataDict = doc.data()
                             
                             tripElement.destination = dataDict["destination"] as? String ?? "Unknown Destination"
@@ -99,7 +125,11 @@ struct TripsView: View {
                             print("TRIP ELEMENT: ")
                             print("trip: \(tripElement)")
                             
+//                            fetchedTrips.append(tripElement)
+                            tripsList.append(tripElement)
+                            
                         }
+                        
                         
                         
 //                        doc.data(as: <#T##Decodable.Protocol#>) find out how to use this might look nicer...
@@ -112,20 +142,31 @@ struct TripsView: View {
                 return
             }
             
-            // moving this iside the task stops the code from adding users that do not exist in the db
-//            if (!contributorIds.contains(docId)) {
-//                contributorIds.append(docId)
-//                print("APPENDED \(docId)")
-//            } else {
-//                errorMessage = "user has already been added"
-//            }
-//
-//
-//
-//
-//            newContributorUsername = ""
         }
+        
+        
+        
     }
+    // https://developer.apple.com/documentation/swiftui/list
+    func renderUserTrips() -> some View {
+        print("--- RENDERING TRIPS: ---")
+        print("PRINTING LIST")
+        print(tripsList)
+        return List(tripsList) { trip in
+            VStack(alignment: .leading) {
+                Text(trip.destination)
+                    .font(.headline)
+                Text("Leader: \(trip.tripLeaderId)")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+            }
+        }
+//        .refreshable {
+//            fetchUserTrips() // Reload trips when the user pulls to refresh
+//        }
+        .navigationTitle("Your Trips")
+    }
+    
 }
 
 

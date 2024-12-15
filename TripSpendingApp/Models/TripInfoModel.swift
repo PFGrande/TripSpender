@@ -13,8 +13,9 @@ import FirebaseAuth
 
 // will contain information about the trip
 
-struct TripInfo: Codable {
+struct TripInfo: Identifiable { // removing codeable may cause problems...
     var tripLeaderId: String; // id of trip owner
+    let id: String;
     
     var destination: String; // address provided by user
     var tripThumbnailUrl: String;
@@ -22,13 +23,13 @@ struct TripInfo: Codable {
 //    var tripItems: [TripItem];
     
     
-    init(destination: String = "", tripThumbnailUrl: String = "", contributorIds: [String] = []) {
+    init(id: String, destination: String = "", tripThumbnailUrl: String = "", contributorIds: [String] = []) {
         if let currUser = Auth.auth().currentUser {
             self.tripLeaderId = currUser.uid
         } else {
             self.tripLeaderId = "nouser" // here is where I will call a different function for the user if they are in offline mode
         }
-        
+        self.id = id
         self.destination = destination
         self.tripThumbnailUrl = tripThumbnailUrl
         self.contributorIds = contributorIds
