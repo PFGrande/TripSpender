@@ -10,18 +10,14 @@
 import SwiftUI
 
 struct DetailTripView: View {
+    var trip: TripInfo
+    
     var body: some View {
-        NavigationStack { // if i want a back button here, keep the Navigation stack
+        VStack { // if i want a back button here, keep the Navigation stack
             // if not, replace it with a NavitationView
             // NavigationView will reset the navigation hierarchy
-            Text("detail view test")
+            Text("detail view test \(trip.destination)")
         }
         
-    }
-}
-
-struct DetailTripView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailTripView()
     }
 }

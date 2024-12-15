@@ -13,7 +13,7 @@ import FirebaseAuth
 
 // will contain information about the trip
 
-struct TripInfo: Identifiable, Equatable { // removing codeable may cause problems...
+struct TripInfo: Identifiable, Equatable, Hashable { // removing codeable may cause problems...
     var tripLeaderId: String; // id of trip owner
     let id: String;
     
@@ -21,6 +21,10 @@ struct TripInfo: Identifiable, Equatable { // removing codeable may cause proble
     var tripThumbnailUrl: String;
     var contributorIds: [String];
 //    var tripItems: [TripItem];
+    
+    var stringValue: String {
+        return id
+    }
     
     
     init(id: String, destination: String = "", tripThumbnailUrl: String = "", contributorIds: [String] = []) {

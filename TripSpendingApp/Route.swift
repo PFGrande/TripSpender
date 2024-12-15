@@ -12,6 +12,8 @@ enum Route: Hashable, Equatable {
     case tripsview
     case registrationview
     case loginview
+    case tripinfomodel(TripInfo)
+    
     
     // case tripdetailview(TripInfo)
     // case profileview(User)
@@ -20,6 +22,7 @@ enum Route: Hashable, Equatable {
         case .registrationview: return "Registration View"
         case .loginview: return "Login View"
         case .tripsview: return "Trips View"
+        case .tripinfomodel(let trip): return trip.stringValue
         }
     }
 }
