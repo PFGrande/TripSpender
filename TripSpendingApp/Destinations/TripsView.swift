@@ -10,6 +10,7 @@
 // Note: REMEMBER TO POSSIBLY PUSH THE PLIST
 // if there is time, add an invite system, realistically users shouldnt be auto invited to something that
 // will cost them money...
+// BUG: offline mode shows ALL trips...
 
 import SwiftUI
 import FirebaseCore
@@ -24,25 +25,27 @@ struct TripsView: View {
     var tripsList: [TripInfo] = []
     @State
     var errorMessage: String = ""
+//    @State
+//    var selectedTrip: TripInfo = TripInfo(id: "")
     
     
     var body: some View {
-            VStack {
-                Text("Your Trips")
-                    .font(.title)
-                    .padding()
-                Button(
-                    action: {
+        VStack {
+            Text("Your Trips")
+                .font(.title)
+                .padding()
+            Button(
+                action: {
 //                        let testTrip = TripInfo()
 //                        testTrip.postTripInfo()
-                        desiresCreation = true
-                        
-                    }, label: {
+                    desiresCreation = true
+                    
+                }, label: {
 //                        Text("Temp test trip creation")
-                        Text("add a new trip")
-                    }
-                )
-                
+                    Text("add a new trip")
+                }
+            )
+            
 //                if tripsList.isEmpty {
 //                    if !errorMessage.isEmpty {
 //                        Text(errorMessage)
@@ -54,21 +57,21 @@ struct TripsView: View {
 //                } else {
 //                    renderUserTrips()
 //                }
-                
-                
-                
-                
-                renderUserTrips()
-                    
-                
-                    
-                
-                
-                
-                if !errorMessage.isEmpty {
-                    Text(errorMessage)
-                }
             
+            
+            
+            
+            renderUserTrips()
+                
+            
+                
+            
+            
+            
+            if !errorMessage.isEmpty {
+                Text(errorMessage)
+            }
+        
 //                NavigationLink(destination: CreateTripView()) {
 //                    Text("Detail View")
 //                        .font(.headline)
@@ -77,14 +80,17 @@ struct TripsView: View {
 //                        .foregroundColor(.white)
 //                        .cornerRadius(10)
 //                }
-            }.navigationDestination(isPresented: $desiresCreation) {
-                CreateTripView()
-            }.onAppear() {
-                fetchUserTrips()
-            }
-            .refreshable {
-                fetchUserTrips()
-            }
+        }.navigationDestination(isPresented: $desiresCreation) {
+            CreateTripView()
+//            ForEach(tripsList) { trip in
+//                DetailTripView(trip: trip)
+//            }
+        }.onAppear() {
+            fetchUserTrips()
+        }
+        .refreshable {
+            fetchUserTrips()
+        }
 
     }
     

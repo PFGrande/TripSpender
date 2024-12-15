@@ -13,7 +13,7 @@ import FirebaseAuth
 
 // will contain information about the trip
 
-struct TripInfo: Identifiable, Equatable { // removing codeable may cause problems...
+struct TripInfo: Identifiable, Equatable, Hashable { // removing codeable may cause problems...
     var tripLeaderId: String; // id of trip owner
     let id: String;
     
@@ -80,6 +80,11 @@ struct TripInfo: Identifiable, Equatable { // removing codeable may cause proble
     // overrides operator (this is pretty cool reminds me of c++ :)
     static func == (lhs: TripInfo, rhs: TripInfo) -> Bool {
         return lhs.id == rhs.id
+    }
+    
+    // for Route to conform with hashable
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
     
 //    func addContributor() {

@@ -32,6 +32,8 @@ struct ContentView: View {
                     RegistrationView()
                 case .loginview:
                     LoginView()
+                case .detailtripview(let tripId):
+                    DetailTripView(tripId: tripId)
                 }
             }
         }
