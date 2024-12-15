@@ -5,6 +5,11 @@
 //  Created by Pedro F. Grande on 12/13/24.
 //
 
+
+// Note: REMEMBER TO ADD FUNCTIONALITY TO VIEW LISTS YOU've BEEN INVITED TO
+// Note: REMEMBER TO POSSIBLY PUSH THE PLIST
+
+
 import SwiftUI
 import FirebaseCore
 import FirebaseFirestore
@@ -32,7 +37,8 @@ struct TripsView: View {
                         desiresCreation = true
                         
                     }, label: {
-                        Text("Temp test trip creation")
+//                        Text("Temp test trip creation")
+                        Text("add a new trip")
                     }
                 )
                 
