@@ -32,7 +32,14 @@ struct TripInfo: Codable {
         self.destination = destination
         self.tripThumbnailUrl = tripThumbnailUrl
         self.contributorIds = contributorIds
-        self.contributorIds[0] = self.tripLeaderId
+//        self.contributorIds[0] = self.tripLeaderId
+        
+        // was likely being added twice or replacing the added member because
+        // an instance of the struct is created AFTER the user clicks submit
+        // submission happens AFTER the user already added other members
+        if !self.contributorIds.contains(self.tripLeaderId) {
+            self.contributorIds.insert(self.tripLeaderId, at: 0) // replaced [0] with insert
+        }
         print("=====TripInfo Model initialized successfully=====")
     }
     

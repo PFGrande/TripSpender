@@ -94,19 +94,41 @@ struct CreateTripView: View {
             return
         }
         Task {
+            var docId: String = ""
             do {
                 let db = Firestore.firestore()
                 let docRef = try await db.collection("users").whereField("username", isEqualTo: newContributorUsername).getDocuments()
-            } catch {
-                errorMessage = "No user found with that name"
                 
+                if docRef.documents.isEmpty {
+                    errorMessage = "No user with that name"
+                    return
+                } else {
+                    for doc in docRef.documents { // iterate through the query collection
+                        docId = doc.documentID
+                        print("docId: \(docId)")
+                    }
+                }
+            } catch {
+                errorMessage = "No user found with that name" // might not be shown to user since this is async
+                print("error in the do statement")
                 return
             }
+            
+            // moving this iside the task stops the code from adding users that do not exist in the db
+            if (!contributorIds.contains(docId)) {
+                contributorIds.append(docId)
+                print("APPENDED \(docId)")
+            } else {
+                errorMessage = "user has already been added"
+            }
+            
+            
+            
+            
+            newContributorUsername = ""
         }
         
-        contributorIds.append(newContributorUsername)
         
-        newContributorUsername = ""
         
         
         
