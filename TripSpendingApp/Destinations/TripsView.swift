@@ -22,7 +22,7 @@ struct TripsView: View {
     
     var body: some View {
             VStack {
-                Text("navbar")
+                Text("Your Trips")
                     .font(.title)
                     .padding()
                 Button(
@@ -106,8 +106,6 @@ struct TripsView: View {
 //                    }
                     return
                 } else {
-                    var fetchedTrips: [TripInfo] = []
-                    
                     // referenced https://firebase.google.com/docs/firestore/query-data/get-data#swift_3
                     for doc in docRef.documents { // iterate through the query collection
                         print("---docId: \(doc.documentID)---")
@@ -126,7 +124,11 @@ struct TripsView: View {
                             print("trip: \(tripElement)")
                             
 //                            fetchedTrips.append(tripElement)
-                            tripsList.append(tripElement)
+                            if (!tripsList.contains(tripElement)) {
+                                tripsList.append(tripElement)
+                            } else {
+                                print("trips already in the tripsList")
+                            }
                             
                         }
                         
@@ -164,7 +166,7 @@ struct TripsView: View {
 //        .refreshable {
 //            fetchUserTrips() // Reload trips when the user pulls to refresh
 //        }
-        .navigationTitle("Your Trips")
+//        .navigationTitle("Your Trips")
     }
     
 }

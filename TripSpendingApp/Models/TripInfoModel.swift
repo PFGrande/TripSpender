@@ -13,7 +13,7 @@ import FirebaseAuth
 
 // will contain information about the trip
 
-struct TripInfo: Identifiable { // removing codeable may cause problems...
+struct TripInfo: Identifiable, Equatable { // removing codeable may cause problems...
     var tripLeaderId: String; // id of trip owner
     let id: String;
     
@@ -75,6 +75,11 @@ struct TripInfo: Identifiable { // removing codeable may cause problems...
             }
             print("! ! ! task finished execution ! ! !")
         }
+    }
+    
+    // overrides operator (this is pretty cool reminds me of c++ :)
+    static func == (lhs: TripInfo, rhs: TripInfo) -> Bool {
+        return lhs.id == rhs.id
     }
     
 //    func addContributor() {
