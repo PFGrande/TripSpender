@@ -8,7 +8,8 @@
 
 // Note: REMEMBER TO ADD FUNCTIONALITY TO VIEW LISTS YOU've BEEN INVITED TO
 // Note: REMEMBER TO POSSIBLY PUSH THE PLIST
-
+// if there is time, add an invite system, realistically users shouldnt be auto invited to something that
+// will cost them money...
 
 import SwiftUI
 import FirebaseCore
@@ -87,6 +88,39 @@ struct TripsView: View {
 
     }
     
+    func addToList(docRef: QuerySnapshot) -> Void{
+        for doc in docRef.documents { // iterate through the query collection
+//                        print("---docId: \(doc.documentID)---")
+//                        print("DATA: ")
+//                        print(doc.data())
+            if !doc.data().isEmpty { // probably redundant check
+                var tripElement = TripInfo(id: doc.documentID)
+                let dataDict = doc.data()
+                
+                tripElement.destination = dataDict["destination"] as? String ?? "Unknown Destination"
+                tripElement.tripLeaderId = dataDict["tripLeaderId"] as? String ?? "Unknown Leader"
+                tripElement.tripThumbnailUrl = dataDict["tripThumbnailUrl"] as? String ?? ""
+                tripElement.contributorIds = dataDict["contributorIds"] as? [String] ?? []
+                
+//                            print("TRIP ELEMENT: ")
+//                            print("trip: \(tripElement)")
+                
+//                            fetchedTrips.append(tripElement)
+                if (!tripsList.contains(tripElement)) {
+                    tripsList.append(tripElement)
+                } else {
+                    print("trips already in the tripsList")
+                }
+                
+            }
+            
+            
+            
+//                        doc.data(as: <#T##Decodable.Protocol#>) find out how to use this might look nicer...
+//                        tripsList.append()
+        }
+    }
+    
     func fetchUserTrips() {
 //        print("===-FETCHING TRIPS-===")
         Task {
@@ -112,37 +146,38 @@ struct TripsView: View {
 //                    }
                     return
                 } else {
+                    addToList(docRef: docRef)
                     // referenced https://firebase.google.com/docs/firestore/query-data/get-data#swift_3
-                    for doc in docRef.documents { // iterate through the query collection
-//                        print("---docId: \(doc.documentID)---")
-//                        print("DATA: ")
-//                        print(doc.data())
-                        if !doc.data().isEmpty { // probably redundant check
-                            var tripElement = TripInfo(id: doc.documentID)
-                            let dataDict = doc.data()
-                            
-                            tripElement.destination = dataDict["destination"] as? String ?? "Unknown Destination"
-                            tripElement.tripLeaderId = dataDict["tripLeaderId"] as? String ?? "Unknown Leader"
-                            tripElement.tripThumbnailUrl = dataDict["tripThumbnailUrl"] as? String ?? ""
-                            tripElement.contributorIds = dataDict["contributorIds"] as? [String] ?? []
-                            
-//                            print("TRIP ELEMENT: ")
-//                            print("trip: \(tripElement)")
-                            
-//                            fetchedTrips.append(tripElement)
-                            if (!tripsList.contains(tripElement)) {
-                                tripsList.append(tripElement)
-                            } else {
-                                print("trips already in the tripsList")
-                            }
-                            
-                        }
-                        
-                        
-                        
-//                        doc.data(as: <#T##Decodable.Protocol#>) find out how to use this might look nicer...
-//                        tripsList.append()
-                    }
+//                    for doc in docRef.documents { // iterate through the query collection
+////                        print("---docId: \(doc.documentID)---")
+////                        print("DATA: ")
+////                        print(doc.data())
+//                        if !doc.data().isEmpty { // probably redundant check
+//                            var tripElement = TripInfo(id: doc.documentID)
+//                            let dataDict = doc.data()
+//
+//                            tripElement.destination = dataDict["destination"] as? String ?? "Unknown Destination"
+//                            tripElement.tripLeaderId = dataDict["tripLeaderId"] as? String ?? "Unknown Leader"
+//                            tripElement.tripThumbnailUrl = dataDict["tripThumbnailUrl"] as? String ?? ""
+//                            tripElement.contributorIds = dataDict["contributorIds"] as? [String] ?? []
+//
+////                            print("TRIP ELEMENT: ")
+////                            print("trip: \(tripElement)")
+//
+////                            fetchedTrips.append(tripElement)
+//                            if (!tripsList.contains(tripElement)) {
+//                                tripsList.append(tripElement)
+//                            } else {
+//                                print("trips already in the tripsList")
+//                            }
+//
+//                        }
+//
+//
+//
+////                        doc.data(as: <#T##Decodable.Protocol#>) find out how to use this might look nicer...
+////                        tripsList.append()
+//                    }
                 }
             } catch {
                 errorMessage = "Query Error: Unable to fetch user trips" // might not be shown to user since this is async
@@ -155,6 +190,8 @@ struct TripsView: View {
         
         
     }
+    
+    
     // https://developer.apple.com/documentation/swiftui/list
     func renderUserTrips() -> some View {
 //        print("--- RENDERING TRIPS: ---")
