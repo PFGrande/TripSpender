@@ -82,7 +82,7 @@ struct TripsView: View {
     }
     
     func fetchUserTrips() {
-        print("===-FETCHING TRIPS-===")
+//        print("===-FETCHING TRIPS-===")
         Task {
             do {
                 let userId: String = fetchUserId()
@@ -108,9 +108,9 @@ struct TripsView: View {
                 } else {
                     // referenced https://firebase.google.com/docs/firestore/query-data/get-data#swift_3
                     for doc in docRef.documents { // iterate through the query collection
-                        print("---docId: \(doc.documentID)---")
-                        print("DATA: ")
-                        print(doc.data())
+//                        print("---docId: \(doc.documentID)---")
+//                        print("DATA: ")
+//                        print(doc.data())
                         if !doc.data().isEmpty { // probably redundant check
                             var tripElement = TripInfo(id: doc.documentID)
                             let dataDict = doc.data()
@@ -120,8 +120,8 @@ struct TripsView: View {
                             tripElement.tripThumbnailUrl = dataDict["tripThumbnailUrl"] as? String ?? ""
                             tripElement.contributorIds = dataDict["contributorIds"] as? [String] ?? []
                             
-                            print("TRIP ELEMENT: ")
-                            print("trip: \(tripElement)")
+//                            print("TRIP ELEMENT: ")
+//                            print("trip: \(tripElement)")
                             
 //                            fetchedTrips.append(tripElement)
                             if (!tripsList.contains(tripElement)) {
@@ -151,9 +151,9 @@ struct TripsView: View {
     }
     // https://developer.apple.com/documentation/swiftui/list
     func renderUserTrips() -> some View {
-        print("--- RENDERING TRIPS: ---")
-        print("PRINTING LIST")
-        print(tripsList)
+//        print("--- RENDERING TRIPS: ---")
+//        print("PRINTING LIST")
+//        print(tripsList)
         return List(tripsList) { trip in
             VStack(alignment: .leading) {
                 Text(trip.destination)
