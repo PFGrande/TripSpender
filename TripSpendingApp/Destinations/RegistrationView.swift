@@ -11,6 +11,7 @@ import FirebaseStorage
 import FirebaseFirestore
 
 struct RegistrationView: View {
+    var onNavigation: (Route) -> Void
     @State
     private var username = ""
     @State
@@ -100,19 +101,13 @@ struct RegistrationView: View {
         }
             .padding()
             .navigationDestination(isPresented: $isRegistered) {
-                TripsView().navigationBarBackButtonHidden()
+                TripsView(onNavigation: onNavigation).navigationBarBackButtonHidden()
             }
             
         
 //        .navigationBarBackButtonHidden(true)
 //        .navigationBarBackButtonHidden(!isRegistered)
         
-    }
-}
-
-struct RegistrationView_Previews: PreviewProvider {
-    static var previews: some View {
-        RegistrationView()
     }
 }
 

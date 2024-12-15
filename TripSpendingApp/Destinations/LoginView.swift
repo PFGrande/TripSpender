@@ -10,6 +10,7 @@ import FirebaseAuth
 // began using NavigationStacks, will overhaul navigation system
 
 struct LoginView: View {
+    var onNavigation: (Route) -> Void
     @State private var email = ""
     @State private var password = ""
     @State private var errorMessage = ""
@@ -63,7 +64,7 @@ struct LoginView: View {
         }
             .padding()
             .navigationDestination(isPresented: $isLoggedIn) {
-                TripsView().navigationBarBackButtonHidden()
+                TripsView(onNavigation: onNavigation).navigationBarBackButtonHidden()
             }
         
     }

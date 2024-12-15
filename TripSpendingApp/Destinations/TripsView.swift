@@ -6,7 +6,7 @@
 //
 
 
-// Note: REMEMBER TO ADD FUNCTIONALITY TO VIEW LISTS YOU've BEEN INVITED TO
+// Note: REMEMBER TO ADD FUNCTIONALITY TO VIEW LISTS YOU've BEEN INVITED TO DONE
 // Note: REMEMBER TO POSSIBLY PUSH THE PLIST
 // if there is time, add an invite system, realistically users shouldnt be auto invited to something that
 // will cost them money...
@@ -18,6 +18,7 @@ import FirebaseFirestore
 struct TripsView: View {
 //    @Binding
 //    var path: [Route]
+    var onNavigation: (Route) -> Void
     @State
     var desiresCreation: Bool = false
     @State
@@ -78,7 +79,7 @@ struct TripsView: View {
 //                        .cornerRadius(10)
 //                }
             }.navigationDestination(isPresented: $desiresCreation) {
-                CreateTripView()
+                CreateTripView(onNavigation: onNavigation)
             }.onAppear() {
                 fetchUserTrips()
             }
@@ -168,15 +169,35 @@ struct TripsView: View {
 //        print("--- RENDERING TRIPS: ---")
 //        print("PRINTING LIST")
 //        print(tripsList)
-        return List(tripsList) { trip in
-            VStack(alignment: .leading) {
-                Text(trip.destination)
-                    .font(.headline)
-                Text("Leader: \(trip.tripLeaderId)")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
+        // start code that works
+//        return List(tripsList) { trip in
+//            VStack(alignment: .leading) {
+//                Text(trip.destination)
+//                    .font(.headline)
+//                Text("Leader: \(trip.tripLeaderId)")
+//                    .font(.subheadline)
+//                    .foregroundColor(.gray)
+//            }
+//        }
+        // end of code that works
+        
+        List(tripsList) { trip in
+            Button(action: {
+                onNavigation(.detailtripview(trip))
+            }) {
+                VStack(alignment: .leading) {
+                    Text(trip.destination)
+                        .font(.headline)
+                    Text("Leader: \(trip.tripLeaderId)")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
             }
         }
+
+        
+        
+        
 //        .refreshable {
 //            fetchUserTrips() // Reload trips when the user pulls to refresh
 //        }

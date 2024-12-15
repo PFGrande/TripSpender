@@ -24,14 +24,28 @@ struct ContentView: View {
             
             HomeView { destination in
                 path.append(destination)
+                print("called onNavigation: \(path)")
             }.navigationDestination(for: Route.self) { route in
                 switch route {
                 case .tripsview:
-                    TripsView().navigationBarBackButtonHidden()
+                    TripsView { destination in // for the onNavigation param
+                        path.append(destination)
+                    }
+                    .navigationBarBackButtonHidden()
+                    
                 case .registrationview:
-                    RegistrationView()
+                    RegistrationView() { destination in // for the onNavigation param
+                        path.append(destination)
+                    }
                 case .loginview:
-                    LoginView()
+                    LoginView() { destination in // for the onNavigation param
+                        path.append(destination)
+                    }
+                case .detailtripview(let trip):
+                    DetailTripView(trip: trip) { destination in
+                        path.append(destination)
+                    }
+                    
                 }
             }
         }

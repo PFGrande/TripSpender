@@ -12,6 +12,7 @@ import FirebaseCore
 import FirebaseFirestore
 
 struct CreateTripView: View {
+    var onNavigation: (Route) -> Void
     @State
     private var destination: String = ""
     @State
@@ -90,7 +91,7 @@ struct CreateTripView: View {
 
             Spacer()
         }.navigationDestination(isPresented: $submittedTrip) {
-            TripsView().navigationBarBackButtonHidden()
+            TripsView(onNavigation: onNavigation).navigationBarBackButtonHidden()
         }
     }
     
