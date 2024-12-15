@@ -26,6 +26,8 @@ struct CreateTripView: View {
     private var errorMessage: String = ""
     @State
     private var successMessage: String = ""
+    @State
+    private var submittedTrip: Bool = false
     
     var body: some View {
         VStack(spacing: 20) {
@@ -70,9 +72,14 @@ struct CreateTripView: View {
 
             Button("Create Trip") {
 //                destination: String = "", tripThumbnailUrl: String = "", contributorIds: [String] = []
+                if (!destination.isEmpty && !tripThumbnailUrl.isEmpty) {
+                    let newTrip = TripInfo(destination: destination, tripThumbnailUrl: tripThumbnailUrl, contributorIds: contributorIds)
+                    newTrip.postTripInfo()
+                    submittedTrip = true
+                } else {
+                    errorMessage = "Please provide a trip name and destination"
+                }
                 
-                let newTrip = TripInfo(destination: destination, tripThumbnailUrl: tripThumbnailUrl, contributorIds: contributorIds)
-                newTrip.postTripInfo()
             }
             .font(.headline)
             .frame(maxWidth: .infinity, minHeight: 50)
@@ -82,6 +89,8 @@ struct CreateTripView: View {
             .padding(.horizontal)
 
             Spacer()
+        }.navigationDestination(isPresented: $submittedTrip) {
+            TripsView().navigationBarBackButtonHidden()
         }
     }
     
