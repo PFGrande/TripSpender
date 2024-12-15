@@ -114,7 +114,7 @@ struct CreateTripView: View {
                 } else {
                     for doc in docRef.documents { // iterate through the query collection
                         docId = doc.documentID
-                        print("docId: \(docId)")
+                        print("---docId: \(docId)---")
                     }
                 }
             } catch {
@@ -137,49 +137,6 @@ struct CreateTripView: View {
             newContributorUsername = ""
         }
         
-        
-        
-        
-        
-//        Task {
-//            do {
-//              let document = try docRef.getDocument()
-//              if document.exists {
-//                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-//                print("Document data: \(dataDescription)")
-//              } else {
-//                print("Document does not exist")
-//              }
-//            } catch {
-//              print("Error getting document: \(error)")
-//            }
-//        }
-        
-        
-        
-        
-        
-
-//        let db = Firestore.firestore()
-//        db.collection("users").whereField("username", isEqualTo: newContributorUsername).getDocuments { (snapshot, error) in
-//            if let error = error {
-//                errorMessage = "Firebase error: \(error.localizedDescription)"
-//                return
-//            }
-//
-//            guard let documents = snapshot?.documents, !documents.isEmpty else {
-//                errorMessage = "No user found with that username"
-//                return
-//            }
-//
-//            for document in documents {
-//                if let uid = document.data()["uid"] as? String {
-//                    contributorIds.append(uid)
-//                    successMessage = "User added successfully!"
-//                }
-//            }
-//            newContributorUsername = "" // Clear input field
-//        }
     }
 
 }

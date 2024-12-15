@@ -58,3 +58,11 @@ class User: Codable {
 //    }
     
 }
+
+func fetchUserId() -> String {
+    guard let currUser = Auth.auth().currentUser else {
+        return ""
+    }
+    return currUser.uid
+}
+ 
