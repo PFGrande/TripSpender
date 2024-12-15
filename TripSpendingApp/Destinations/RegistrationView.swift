@@ -123,9 +123,9 @@ func register(email: String, password: String, username: String, completion: @es
             completion(error)
         } else if let user = authResult?.user {
             let db = Firestore.firestore()
-            db.collection("users").document(user.uid).setData([
+            db.collection("users").document(user.uid).setData([ // document created named after userid for easier queries
                 "username": username,
-                "email": email
+                "email": email,
             ]) { firestoreError in
                 completion(firestoreError)
             }

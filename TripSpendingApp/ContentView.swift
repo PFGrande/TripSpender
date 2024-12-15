@@ -15,8 +15,8 @@ struct ContentView: View {
     
     @State
     var path: [Route] = []
-    @State
-    private var isLoggedIn: Bool = Auth.auth().currentUser != nil // take user directly to tripview if logged in
+//    @State
+//    private var isLoggedIn: Bool = Auth.auth().currentUser != nil // take user directly to tripview if logged in
     // add this feature later, focus on sending and retrieving items
     
     var body: some View {

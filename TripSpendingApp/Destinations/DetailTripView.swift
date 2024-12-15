@@ -5,6 +5,8 @@
 //  Created by Pedro F. Grande on 12/13/24.
 //
 
+// Will list all the items in a trip
+
 import SwiftUI
 
 struct DetailTripView: View {

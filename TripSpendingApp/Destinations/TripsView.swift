@@ -10,13 +10,24 @@ import SwiftUI
 struct TripsView: View {
 //    @Binding
 //    var path: [Route]
+    @State
+    var desiresCreation: Bool = false
     
     var body: some View {
             VStack {
                 Text("navbar")
                     .font(.title)
                     .padding()
-                
+                Button(
+                    action: {
+//                        let testTrip = TripInfo()
+//                        testTrip.postTripInfo()
+                        desiresCreation = true
+                        
+                    }, label: {
+                        Text("Temp test trip creation")
+                    }
+                )
                 
             
 //                NavigationLink(destination: CreateTripView()) {
@@ -27,6 +38,8 @@ struct TripsView: View {
 //                        .foregroundColor(.white)
 //                        .cornerRadius(10)
 //                }
+            }.navigationDestination(isPresented: $desiresCreation) {
+                CreateTripView()
             }
 
     }

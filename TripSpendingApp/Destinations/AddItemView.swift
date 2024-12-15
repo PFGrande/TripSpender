@@ -5,6 +5,8 @@
 //  Created by Pedro F. Grande on 12/13/24.
 //
 
+// will be a sheet that slides up in the detail trip view
+
 import SwiftUI
 
 struct AddItemView: View {
