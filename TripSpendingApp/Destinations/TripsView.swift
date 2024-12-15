@@ -89,6 +89,7 @@ struct TripsView: View {
     }
     
     func addToList(docRef: QuerySnapshot) -> Void{
+        // referenced https://firebase.google.com/docs/firestore/query-data/get-data#swift_3
         for doc in docRef.documents { // iterate through the query collection
 //                        print("---docId: \(doc.documentID)---")
 //                        print("DATA: ")
@@ -135,50 +136,20 @@ struct TripsView: View {
                 
                 // I also need to add a way to fetch the trips they've been added to
                 let docRef = try await db.collection("TripInfo").whereField("tripLeaderId", isEqualTo: userId).getDocuments()
+                let memberDocRef = try await db.collection("TripInfo").whereField("contributorIds", arrayContains: userId).getDocuments()
                 
                 if docRef.documents.isEmpty {
                     errorMessage = "you have no trips"
-                    
-//                    // used chatgpt for this code snippet, it should apparently wait for the
-//                    // ui thread to reflect changes before this function is done
-//                    await MainActor.run {
-//                        errorMessage = "You have no trips"
-//                    }
                     return
                 } else {
                     addToList(docRef: docRef)
-                    // referenced https://firebase.google.com/docs/firestore/query-data/get-data#swift_3
-//                    for doc in docRef.documents { // iterate through the query collection
-////                        print("---docId: \(doc.documentID)---")
-////                        print("DATA: ")
-////                        print(doc.data())
-//                        if !doc.data().isEmpty { // probably redundant check
-//                            var tripElement = TripInfo(id: doc.documentID)
-//                            let dataDict = doc.data()
-//
-//                            tripElement.destination = dataDict["destination"] as? String ?? "Unknown Destination"
-//                            tripElement.tripLeaderId = dataDict["tripLeaderId"] as? String ?? "Unknown Leader"
-//                            tripElement.tripThumbnailUrl = dataDict["tripThumbnailUrl"] as? String ?? ""
-//                            tripElement.contributorIds = dataDict["contributorIds"] as? [String] ?? []
-//
-////                            print("TRIP ELEMENT: ")
-////                            print("trip: \(tripElement)")
-//
-////                            fetchedTrips.append(tripElement)
-//                            if (!tripsList.contains(tripElement)) {
-//                                tripsList.append(tripElement)
-//                            } else {
-//                                print("trips already in the tripsList")
-//                            }
-//
-//                        }
-//
-//
-//
-////                        doc.data(as: <#T##Decodable.Protocol#>) find out how to use this might look nicer...
-////                        tripsList.append()
-//                    }
                 }
+                if memberDocRef.documents.isEmpty {
+                    return
+                } else {
+                    addToList(docRef: memberDocRef)
+                }
+                
             } catch {
                 errorMessage = "Query Error: Unable to fetch user trips" // might not be shown to user since this is async
                 print("error in the do statement")
