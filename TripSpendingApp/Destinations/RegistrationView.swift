@@ -23,6 +23,8 @@ struct RegistrationView: View {
     private var errorMessage = ""
     @State
     private var isRegistered: Bool = false
+    @State
+    private var isAvailable: Bool = false // won't allow an empty name
     
     var body: some View {
         VStack {
@@ -37,6 +39,9 @@ struct RegistrationView: View {
                 .padding(.bottom, 50)
             
             TextField("Username", text: $username)
+                .onChange(of: username) { newValue in
+                checkNameAvailability()
+                }
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
             
@@ -52,20 +57,24 @@ struct RegistrationView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
             
+            
+            
             Button(
                 action: {
-                    if password == confirmPass {
+                    if password == confirmPass && isAvailable {
                         register(email: email, password: password, username: username) { error in
                             if let error = error {
                                 errorMessage = error.localizedDescription
                             }
                             else {
                                 errorMessage = "Registration successful!"
-                                isRegistered = true
+//                                isRegistered = true
                             }
                         }
-                    } else {
+                    } else if password != confirmPass {
                         errorMessage = "passwords must match"
+                    } else if !isAvailable {
+                        errorMessage = "user name taken"
                     }
                 },
                 label: {
@@ -108,6 +117,53 @@ struct RegistrationView: View {
 //        .navigationBarBackButtonHidden(!isRegistered)
         
     }
+    
+    func checkNameAvailability() {
+        print("Username: \(username)")
+        print("isAvailable: \(isAvailable)")
+        print("isRegistered: \(isRegistered)")
+        print("passwords match:  \(password == confirmPass)")
+
+        Task {
+            do {
+                let db = Firestore.firestore()
+                
+                let docRef = try await db.collection("users").whereField("username", isEqualTo: username).getDocuments()
+                if docRef.isEmpty {
+                    isAvailable = true
+                    return
+                } else {
+                    errorMessage = "name is already taken"
+                    isAvailable = false
+                    return
+                }
+                
+            } catch {
+                isAvailable = false
+                errorMessage = "name is already taken"
+                return
+            }
+        }
+    }
+    
+    // generated using chatGPT
+    func register(email: String, password: String, username: String, completion: @escaping (Error?) -> Void) {
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            if let error = error {
+                completion(error)
+            } else if let user = authResult?.user {
+                let db = Firestore.firestore()
+                db.collection("users").document(user.uid).setData([ // document created named after userid for easier queries
+                    "username": username,
+                    "email": email,
+                ]) { firestoreError in
+                    completion(firestoreError)
+                }
+            }
+        }
+        isRegistered = true
+    }
+    
 }
 
 struct RegistrationView_Previews: PreviewProvider {
@@ -116,19 +172,7 @@ struct RegistrationView_Previews: PreviewProvider {
     }
 }
 
-// generated using chatGPT
-func register(email: String, password: String, username: String, completion: @escaping (Error?) -> Void) {
-    Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-        if let error = error {
-            completion(error)
-        } else if let user = authResult?.user {
-            let db = Firestore.firestore()
-            db.collection("users").document(user.uid).setData([ // document created named after userid for easier queries
-                "username": username,
-                "email": email,
-            ]) { firestoreError in
-                completion(firestoreError)
-            }
-        }
-    }
-}
+
+
+
+
