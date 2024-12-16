@@ -8,6 +8,7 @@
 // Will list all the items in a trip
 
 import SwiftUI
+import FirebaseFirestore
 
 struct DetailTripView: View {
     var trip: TripInfo
@@ -88,18 +89,61 @@ struct DetailTripView: View {
 
 // sheet to view users in trip
 struct MemberListView: View {
-    var members: [String] // Array of member names
-
+    var members: [String] // Array of member ids
+    
+    @State
+    private var memberNames: [String] = []// array of member names
+    
     var body: some View {
         VStack {
-            List(members, id: \.self) { member in
+            List(memberNames, id: \.self) { member in
                 Text(member)
             }
             .navigationTitle("Members")
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear() {
+                fetchMemberUsernames()
+            }
         }
     }
-    
+
+    // im going to be honest, a function like this should be in the user model
+    // but this is quicker to implement. I will most likely have to refactor the code
+    // since i dont like this approach
+    func fetchMemberUsernames() {
+        Task {
+            do {
+                let db = Firestore.firestore()
+                for member in members {
+                    let docRef = try await db.collection("users").document(member).getDocument()
+                    if docRef.exists {
+                        let username = docRef["username"] as? String ?? ""
+//                        print(username)
+                        memberNames.append(username)
+                    } else { return }
+                     
+                    
+                    
+                    
+//                    for doc in docRef.documents {
+//                        let dataDict = doc.data()
+//                        print("---user data fetched---")
+//                        print(doc.data())
+//
+//                        memberNames.append(dataDict["username"] as? String ?? "err")
+//
+//                    }
+                    
+                }
+                
+                
+                
+            } catch {
+                print("err fetching names: query err")
+                return
+            }
+        }
+    }
     
     
     

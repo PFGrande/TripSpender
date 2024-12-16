@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import FirebaseAuth
+import FirebaseFirestore
 
 // made user a class because it will be used all accross the app and accessing the instance
 // is easier since it's not a value type.
@@ -65,4 +66,32 @@ func fetchUserId() -> String {
     }
     return currUser.uid
 }
- 
+//
+//func fetchUserNameById(id: String) async -> String {
+//
+//    do {
+//        var username: String = "" // if returns empty there was an error
+//        do {
+//            let db = Firestore.firestore()
+//
+//            let docRef = try await db.collection("users").whereField("filename", isEqualTo: id).getDocuments()
+//
+//            if docRef.documents.isEmpty{
+//                return "unable to find user id"
+//            } else {
+//                for doc in docRef.documents {
+//                    let dataDict = doc.data()
+//                    username = dataDict["username"] as! String
+//
+//                }
+//            }
+//        }
+//        return username
+////        return "" // temp
+//    } catch {
+//        print("Error fetching user name: \(error.localizedDescription)")
+//        return "err"
+//    }
+////    return "" // temp
+//}
+//

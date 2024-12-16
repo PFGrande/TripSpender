@@ -91,7 +91,7 @@ struct TripsView: View {
 //                        print("DATA: ")
 //                        print(doc.data())
             if !doc.data().isEmpty { // probably redundant check
-                var tripElement = TripInfo(id: doc.documentID)
+                var tripElement = TripInfo(id: doc.documentID) // instance to upload
                 let dataDict = doc.data()
                 
                 tripElement.destination = dataDict["destination"] as? String ?? "Unknown Destination"
