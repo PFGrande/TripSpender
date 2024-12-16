@@ -12,7 +12,10 @@ import FirebaseFirestore
 
 struct DetailTripView: View {
     var trip: TripInfo
-    @State private var isShowingMembers = false
+    @State
+    private var isShowingMembers = false
+    @State
+    private var isAddingItem = false
     
     // used chatgpt for temp visuals
     var body: some View {
@@ -45,6 +48,22 @@ struct DetailTripView: View {
 
                 // Button to show members
                 Button(action: {
+                    isAddingItem = true
+                }) {
+                    Text("Add Item")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .sheet(isPresented: $isAddingItem) {
+                    AddItemView(isPresented: $isAddingItem)
+                }
+                
+                // Button to show item adding menu
+                Button(action: {
                     isShowingMembers = true
                 }) {
                     Text("View Members")
@@ -59,24 +78,6 @@ struct DetailTripView: View {
                     MemberListView(members: trip.contributorIds)
                 }
 
-                // List of TripItem instances implement when items are implemented
-//                VStack(alignment: .leading, spacing: 10) {
-//                    Text("Trip Items")
-//                        .font(.headline)
-//                        .padding(.top)
-//
-//                    List(trip.items) { item in
-//                        HStack {
-//                            Text(item.name)
-//                                .font(.body)
-//                            Spacer()
-//                            Text(item.quantity)
-//                                .font(.subheadline)
-//                                .foregroundColor(.gray)
-//                        }
-//                    }
-//                    .frame(height: 200) // Adjust as needed
-//                }
             }
             .padding()
         }
@@ -121,22 +122,7 @@ struct MemberListView: View {
 //                        print(username)
                         memberNames.append(username)
                     } else { return }
-                     
-                    
-                    
-                    
-//                    for doc in docRef.documents {
-//                        let dataDict = doc.data()
-//                        print("---user data fetched---")
-//                        print(doc.data())
-//
-//                        memberNames.append(dataDict["username"] as? String ?? "err")
-//
-//                    }
-                    
                 }
-                
-                
                 
             } catch {
                 print("err fetching names: query err")
