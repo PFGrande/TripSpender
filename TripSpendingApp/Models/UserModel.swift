@@ -66,6 +66,11 @@ func fetchUserId() -> String {
     }
     return currUser.uid
 }
+
+func sessiontStatus() -> FirebaseAuth.User? {
+    return Auth.auth().currentUser
+}
+
 //
 //func fetchUserNameById(id: String) async -> String {
 //

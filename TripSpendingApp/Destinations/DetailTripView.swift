@@ -108,7 +108,11 @@ struct DetailTripView: View {
         List(items) { item in
             
 //            var itemText = Text(item.name)
-            Text(item.name)
+            HStack {
+                Text(item.name)
+                Spacer()
+                Text(String(format: "$%.2f", item.price))
+            }
                 .foregroundColor(item.canBeDeleted ? .blue : .red)
                 .listRowBackground(item.contributorsIds.contains(fetchUserId()) ? Color.white : Color.gray)
                 .onLongPressGesture {
@@ -120,6 +124,7 @@ struct DetailTripView: View {
                     if (item.addedById == fetchUserId()) {
                         Button(action: {
                             print("delete \(item.name)")
+                            print(fetchUserId())
                             Task {
                                 await trip.deleteTripItem(itemId: item.id)
                                 items = await trip.fetchItems()

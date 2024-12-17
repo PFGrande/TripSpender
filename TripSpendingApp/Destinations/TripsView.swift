@@ -14,6 +14,7 @@
 import SwiftUI
 import FirebaseCore
 import FirebaseFirestore
+import FirebaseAuth
 
 struct TripsView: View {
 //    @Binding
@@ -24,10 +25,25 @@ struct TripsView: View {
     var tripsList: [TripInfo] = []
     @State
     var errorMessage: String = ""
-    
+    @State
+    var loggedOut = false
     
     var body: some View {
             VStack {
+                Button(
+                    
+                    action: {
+                        logOut()
+                        loggedOut = true
+                        
+                    },
+                        
+                    label: {
+                        Text("logout")
+                    }
+                
+                
+                )
                 Text("Your Trips")
                     .font(.title)
                     .padding()
@@ -76,10 +92,13 @@ struct TripsView: View {
             }.navigationDestination(isPresented: $desiresCreation) {
                 CreateTripView()
             }.onAppear() {
+                loggedOut = sessiontStatus() == nil
                 fetchUserTrips()
             }
             .refreshable {
                 fetchUserTrips()
+            }.navigationDestination(isPresented: $loggedOut) {
+                LoginView().navigationBarBackButtonHidden()
             }
 
     }
@@ -187,5 +206,3 @@ struct TripsView: View {
     }
     
 }
-
-
