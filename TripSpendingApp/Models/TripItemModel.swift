@@ -26,6 +26,19 @@ struct TripItem: Codable, Identifiable {
     var quantity: Int = 1;
     // no more required items may be added to a trip after the list is created
     
+    
+//    public func userOptIn(itemId: String) {
+//        
+//    }
+//    
+//    public func fetchItem(itemId: String) {
+//        
+//    }
+//    
+//    public func updateIem(itemId: String) {
+//        
+//    }
+    
     // https://firebase.google.com/docs/firestore/manage-data/add-data#swift
     public func postTripItem(tripId: String) {
 

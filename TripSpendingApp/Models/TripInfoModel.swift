@@ -124,6 +124,55 @@ struct TripInfo: Identifiable, Equatable, Hashable { // removing codeable may ca
         return items
     }
     
+    // im thinking ! modularization
+    
+    // reminder: I am working on having users opt in and out
+    // of paying for items on a trip
+    
+    public func userOptIn(itemId: String, newMemberId: String) async {
+        var tripItem: TripItem = await fetchItem(itemId: itemId)!
+        tripItem.contributorsIds.append(newMemberId)
+        
+        updateItem(updatedItem: tripItem)
+        
+    }
+    
+    public func fetchItem(itemId: String) async -> TripItem? {
+        
+        let db = Firestore.firestore()
+        
+        do {
+            let itemRef = try await db.collection("TripInfo").document(self.id).collection("TripItem").document(itemId).getDocument()
+            
+            if itemRef.exists {
+                var tripItem = TripItem()
+                let data = itemRef
+
+                tripItem.id = itemRef.documentID
+                print("fetchItems() doc id: \(tripItem.id)")
+                tripItem.name = data["name"] as? String ?? "???"
+                tripItem.price = data["price"] as? Double ?? 0.00
+                tripItem.quantity = data["quanity"] as? Int ?? 1
+                tripItem.addedById = data["addedById"] as? String ?? "???"
+                tripItem.canBeDeleted = data["canBeDeleted"] as? Bool ?? false
+                tripItem.contributorsIds = data["contributorsIds"] as? [String] ?? []
+                
+                
+                
+                return tripItem
+            }
+            return nil
+        } catch {
+            print("failed to fetch item")
+        }
+        return nil
+        
+    }
+    
+    public func updateItem(updatedItem: TripItem) {
+        
+    }
+    
 //    func addContributor() {
 //        add logic to append user to the list, happens at trip creation
 //    }
