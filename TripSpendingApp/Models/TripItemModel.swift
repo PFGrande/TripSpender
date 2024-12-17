@@ -11,7 +11,7 @@ import FirebaseFirestore
 
 // will contain info on an item
 
-struct TripItem: Codable {
+struct TripItem: Codable, Identifiable {
     var id: String = "";
     var name: String = "";
     var price: Double = 0.00;

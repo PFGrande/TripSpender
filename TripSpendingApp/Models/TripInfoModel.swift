@@ -98,7 +98,8 @@ struct TripInfo: Identifiable, Equatable, Hashable { // removing codeable may ca
             for doc in tripsRef.documents {
                 let data = doc.data()
                 var tripItem = TripItem()
-                
+                tripItem.id = doc.documentID
+                print("fetchItems() doc id: \(tripItem.id)")
                 tripItem.name = data["name"] as? String ?? "???"
                 tripItem.price = data["price"] as? Double ?? 0.00
                 tripItem.quantity = data["quanity"] as? Int ?? 1

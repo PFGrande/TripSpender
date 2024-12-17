@@ -18,18 +18,20 @@ struct DetailTripView: View {
     private var isAddingItem = false
     @State
     private var items: [TripItem] = []
+    @State
+    private var itemFetchTask: Task<Void, Never>? // suggested by chatgpt
     
     // used chatgpt for temp visuals
     var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                // Thumbnail at the top
+        //ScrollView {
+        VStack(spacing: 20) {
+            // Thumbnail at the top
 //                if let thumbnail: String = trip.tripThumbnailUrl {
-                Text(trip.tripThumbnailUrl) // temporary until i learn to display img
+            Text(trip.tripThumbnailUrl) // temporary until i learn to display img
 //                        .resizable()
-                    .scaledToFit()
-                    .frame(height: 200)
-                    .cornerRadius(10)
+                .scaledToFit()
+                .frame(height: 200)
+                .cornerRadius(10)
 //                } else {
 //                    Rectangle()
 //                        .fill(Color.gray.opacity(0.3))
@@ -42,48 +44,73 @@ struct DetailTripView: View {
 //                        )
 //                }
 
-                // Destination text
-                Text(trip.destination)
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .multilineTextAlignment(.center)
+            // Destination text
+            Text(trip.destination)
+                .font(.title)
+                .fontWeight(.bold)
+                .multilineTextAlignment(.center)
 
-                // Button to show item adding menu
-                Button(action: {
-                    isAddingItem = true
-                    
-                }) {
-                    Text("Add Item")
-                        .font(.headline)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                .sheet(isPresented: $isAddingItem) {
-                    AddItemView(tripId: trip.id, isPresented: $isAddingItem)
-                }
+            // Button to show item adding menu
+            Button(action: {
+                isAddingItem = true
                 
-                // Button to show members
-                Button(action: {
-                    isShowingMembers = true
-                }) {
-                    Text("View Members")
-                        .font(.headline)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                .sheet(isPresented: $isShowingMembers) {
-                    MemberListView(members: trip.contributorIds)
-                }
-
+            }) {
+                Text("Add Item")
+                    .font(.headline)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
             }
-            .padding()
+            .sheet(isPresented: $isAddingItem) {
+                AddItemView(tripId: trip.id, isPresented: $isAddingItem)
+            }
+            
+            // Button to show members
+            Button(action: {
+                isShowingMembers = true
+            }) {
+                Text("View Members")
+                    .font(.headline)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+            .sheet(isPresented: $isShowingMembers) {
+                MemberListView(members: trip.contributorIds)
+            }
+            
+            renderItems()
+//            List(items) { item in
+//                Text(item.name)
+//
+//            }.onAppear() {
+//                itemFetchTask = Task {
+//                    print("ON APPEAR:::::")
+//                    print(items)
+//                    items = await trip.fetchItems()
+//                    print("AFTER")
+//                    print(items)
+//                }
+//            }.onDisappear() {
+//                // suggested by chatgpt
+//                // apparently when the task is called it doesnt stop when the view is no longer being rendered
+//                // might have caused a memory leak somewhere
+//                // without knowing earlier into the project
+//                itemFetchTask?.cancel()
+//            }.refreshable {
+//                itemFetchTask = Task {
+//                    items = await trip.fetchItems()
+//                }
+//            }
+//                renderItems()
+
         }
+        .padding()
+        //}
         .navigationTitle("Trip Details")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -91,6 +118,33 @@ struct DetailTripView: View {
 //    func renderItems() {
 //        trip.fetchItems()
 //    }
+    
+    func renderItems() -> some View {
+
+        List(items) { item in
+            Text(item.name)
+
+        }.onAppear() {
+            itemFetchTask = Task {
+                print("ON APPEAR:::::")
+                print(items)
+                items = await trip.fetchItems()
+                print("AFTER")
+                print(items)
+            }
+        }.onDisappear() {
+            // suggested by chatgpt
+            // apparently when the task is called it doesnt stop when the view is no longer being rendered
+            // might have caused a memory leak somewhere
+            // without knowing earlier into the project
+            itemFetchTask?.cancel()
+        }.refreshable {
+            itemFetchTask = Task {
+                items = await trip.fetchItems()
+            }
+        }
+
+    }
 
 }
 
