@@ -64,6 +64,8 @@ struct HomeView: View {
                     .aspectRatio(contentMode: .fit)
             }
             .frame(height: 200)
+        }.onAppear() {
+            logOut()
         }
     }
 }

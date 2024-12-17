@@ -14,7 +14,7 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var errorMessage = ""
-    @State private var isLoggedIn = false  //false
+    @State private var isLoggedIn = false //false
     
     var body: some View {
         VStack(spacing: 20) {
@@ -65,8 +65,6 @@ struct LoginView: View {
             .padding()
             .navigationDestination(isPresented: $isLoggedIn) {
                 TripsView().navigationBarBackButtonHidden()
-            }.onAppear() {
-                isLoggedIn = Auth.auth().currentUser != nil
             }
             
         
