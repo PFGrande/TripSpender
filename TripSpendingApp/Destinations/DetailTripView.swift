@@ -146,6 +146,10 @@ struct DetailTripView: View {
                     if (item.contributorsIds.contains(fetchUserId())) {
                         Button(action: {
                             print("opt-out \(item.name)")
+                            Task {
+                                await trip.userOptOut(itemId: item.id, memberId: fetchUserId())
+                                items = await trip.fetchItems()
+                            }
                         }) {
                             Label("opt-out", systemImage: "person.fill.badge.minus")
                         }
