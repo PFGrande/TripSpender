@@ -11,6 +11,7 @@ import SwiftUI
 
 
 struct AddItemView: View {
+    var tripId: String
     @State
     var itemSubmitted: Bool = false
     @State
@@ -69,6 +70,17 @@ struct AddItemView: View {
                         errorMessage = "Please provide a valid item name and price."
                    } else {
                        isPresented = false
+                       var newItem = TripItem()
+                       let userId = fetchUserId()
+                       
+                       newItem.name = itemName
+                       newItem.price = itemPrice
+                       newItem.canBeDeleted = true
+                       newItem.addedById = userId
+                       newItem.contributorsIds.append(userId)
+                       
+                       newItem.postTripItem(tripId: tripId)
+                       
                        // Handle the item addition logic
                        print("Item added: \(itemName) - $\(itemPrice)")
                        

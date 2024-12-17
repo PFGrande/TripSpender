@@ -161,32 +161,6 @@ struct TripsView: View {
     
     // https://developer.apple.com/documentation/swiftui/list
     func renderUserTrips() -> some View {
-//        print("--- RENDERING TRIPS: ---")
-//        print("PRINTING LIST")
-//        print(tripsList)
-//        return List(tripsList) { trip in
-//            var isTapped: Bool = false
-//
-//            Button(
-//                action: {
-//                    isTapped = true
-//                },
-//                label: {
-//                VStack() {
-//
-//                    Text(trip.destination)
-//                        .font(.headline)
-//                    Text("Leader: \(trip.tripLeaderId)")
-//                        .font(.subheadline)
-//                        .foregroundColor(.gray)
-//                }
-//                }
-//            )
-//
-//
-//
-//
-//        }.navigationDestination(isPresented: isTapped, destination: DetailTripView(trip))
         List(tripsList) { trip in
             NavigationLink(
                 destination: DetailTripView(trip: trip), // Navigate to a view specific to this trip

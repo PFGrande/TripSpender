@@ -16,6 +16,8 @@ struct DetailTripView: View {
     private var isShowingMembers = false
     @State
     private var isAddingItem = false
+    @State
+    private var items: [TripItem] = []
     
     // used chatgpt for temp visuals
     var body: some View {
@@ -46,9 +48,10 @@ struct DetailTripView: View {
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
 
-                // Button to show members
+                // Button to show item adding menu
                 Button(action: {
                     isAddingItem = true
+                    
                 }) {
                     Text("Add Item")
                         .font(.headline)
@@ -59,10 +62,10 @@ struct DetailTripView: View {
                         .cornerRadius(10)
                 }
                 .sheet(isPresented: $isAddingItem) {
-                    AddItemView(isPresented: $isAddingItem)
+                    AddItemView(tripId: trip.id, isPresented: $isAddingItem)
                 }
                 
-                // Button to show item adding menu
+                // Button to show members
                 Button(action: {
                     isShowingMembers = true
                 }) {
@@ -84,6 +87,10 @@ struct DetailTripView: View {
         .navigationTitle("Trip Details")
         .navigationBarTitleDisplayMode(.inline)
     }
+    
+//    func renderItems() {
+//        trip.fetchItems()
+//    }
 
 }
 
