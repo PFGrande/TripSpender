@@ -155,7 +155,7 @@ struct TripInfo: Identifiable, Equatable, Hashable { // removing codeable may ca
         
     }
     
-    public func getItemFromRef(itemId: String, itemRef: DocumentReference) async -> TripItem? {
+    private func getItemFromRef(itemId: String, itemRef: DocumentReference) async -> TripItem? {
         
         do {
             let itemSnapshot = try await fetchItemRef(itemId: itemId).getDocument()
@@ -185,56 +185,37 @@ struct TripInfo: Identifiable, Equatable, Hashable { // removing codeable may ca
         
     }
     
-    public func fetchItemRef(itemId: String) async -> DocumentReference {
+    private func fetchItemRef(itemId: String) async -> DocumentReference {
         
         let db = Firestore.firestore()
         
-//        do {
             let itemRef = db.collection("TripInfo").document(self.id).collection("TripItem").document(itemId) //.getDocument()
             
             return itemRef
-//            if itemRef.exists {
-//                var tripItem = TripItem()
-//                let data = itemRef
-//
-//                tripItem.id = itemRef.documentID
-//                print("fetchItems() doc id: \(tripItem.id)")
-//                tripItem.name = data["name"] as? String ?? "???"
-//                tripItem.price = data["price"] as? Double ?? 0.00
-//                tripItem.quantity = data["quanity"] as? Int ?? 1
-//                tripItem.addedById = data["addedById"] as? String ?? "???"
-//                tripItem.canBeDeleted = data["canBeDeleted"] as? Bool ?? false
-//                tripItem.contributorsIds = data["contributorsIds"] as? [String] ?? []
-//
-//
-//
-//                return tripItem
-//            }
-//            return nil
-//        } catch {
-//            print("failed to fetch item")
-//        }
-//        return nil
         
     }
     
     
     // there is a firebase function to update items, look into it
-    public func updateItem(updatedItem: TripItem, itemRef: DocumentReference) {
+    private func updateItem(updatedItem: TripItem, itemRef: DocumentReference) {
         itemRef.updateData([
             "contributorsIds": updatedItem.contributorsIds
         ])
         
     }
     
-//    func addContributor() {
-//        add logic to append user to the list, happens at trip creation
-//    }
+    public func deleteTripItem(itemId: String) async {
+        do {
+            let itemRef = await fetchItemRef(itemId: itemId)
+            try await itemRef.delete() // Asynchronous deletion
+            print("Document successfully deleted!")
+        } catch {
+            print("Error deleting document: \(error.localizedDescription)")
+        }
+    }
     
-//    func updateContributors() {
-//        add logic for appending more users after the trip has already been created
-//    }
     
     
-    // write a function that just returns the contribuor id array's length to count members
+    // write a function that just returns the contribuor id array's length to count members and divide the price among them
+    
 }

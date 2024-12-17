@@ -70,4 +70,10 @@ struct TripItem: Codable, Identifiable {
         }
     }
     
+    
+    public func computeSharedPrice() -> Double {
+        let roundedResult = ((self.price / Double(self.contributorsIds.count)) * 100).rounded() / 100
+        return roundedResult
+    }
+    
 }

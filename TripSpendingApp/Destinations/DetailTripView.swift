@@ -21,6 +21,7 @@ struct DetailTripView: View {
     @State
     private var itemFetchTask: Task<Void, Never>? // suggested by chatgpt
     
+    
     // used chatgpt for temp visuals
     var body: some View {
         //ScrollView {
@@ -85,40 +86,21 @@ struct DetailTripView: View {
             }
             
             renderItems()
-//            List(items) { item in
-//                Text(item.name)
-//
-//            }.onAppear() {
-//                itemFetchTask = Task {
-//                    print("ON APPEAR:::::")
-//                    print(items)
-//                    items = await trip.fetchItems()
-//                    print("AFTER")
-//                    print(items)
-//                }
-//            }.onDisappear() {
-//                // suggested by chatgpt
-//                // apparently when the task is called it doesnt stop when the view is no longer being rendered
-//                // might have caused a memory leak somewhere
-//                // without knowing earlier into the project
-//                itemFetchTask?.cancel()
-//            }.refreshable {
-//                itemFetchTask = Task {
-//                    items = await trip.fetchItems()
-//                }
-//            }
-//                renderItems()
 
         }
         .padding()
         //}
         .navigationTitle("Trip Details")
         .navigationBarTitleDisplayMode(.inline)
+        .onChange(of: isAddingItem) {newValue in
+            if !newValue {
+                Task {
+                    print("Sheet was dismissed!")
+                    items = await trip.fetchItems()
+                }
+            }
+        }
     }
-    
-//    func renderItems() {
-//        trip.fetchItems()
-//    }
     
     func renderItems() -> some View {
         
@@ -138,6 +120,11 @@ struct DetailTripView: View {
                     if (item.addedById == fetchUserId()) {
                         Button(action: {
                             print("delete \(item.name)")
+                            Task {
+                                await trip.deleteTripItem(itemId: item.id)
+                                items = await trip.fetchItems()
+                            }
+                            
                         }) {
                             Label("delete", systemImage: "trash.square.fill")
                         }
@@ -167,24 +154,6 @@ struct DetailTripView: View {
                     
                 }
             
-            
-//            if (item.canBeDeleted) {
-//
-//
-//
-//
-//            }
-            
-            
-            
-            
-//            if (item.contributorsIds.contains(fetchUserId())) {
-//                Text(item.name).listRowBackground(.gray)
-//            } else {
-//                Text(item.name).listRowBackground(.white)
-//            }
-                
-
         }.onAppear() {
             itemFetchTask = Task {
                 print("ON APPEAR:::::")
