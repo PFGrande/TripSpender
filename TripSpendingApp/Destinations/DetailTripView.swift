@@ -65,7 +65,8 @@ struct DetailTripView: View {
             }
             .sheet(isPresented: $isAddingItem) {
                 AddItemView(tripId: trip.id, isPresented: $isAddingItem)
-            }
+            } // after an item is added the list does NOT
+            // auto-refresh...
             
             // Button to show members
             Button(action: {
