@@ -73,6 +73,32 @@ func sessiontStatus() -> FirebaseAuth.User? {
     return Auth.auth().currentUser
 }
 
+func fetchUserRef(userId: String) -> DocumentReference {
+    let db = Firestore.firestore()
+    
+    let userRef = db.collection("users").document(userId)
+        
+    return userRef
+}
+
+func getUserName(userId: String) async -> String? {
+    var userRef = fetchUserRef(userId: userId)
+    
+    do {
+        let userSnapshot = try await fetchUserRef(userId: userId).getDocument()
+        
+        if userSnapshot.exists {
+            return userSnapshot["username"] as? String ?? "???"
+        }
+        
+    } catch {
+        return nil
+    }
+    return nil
+}
+
+
+
 //
 //func fetchUserNameById(id: String) async -> String {
 //

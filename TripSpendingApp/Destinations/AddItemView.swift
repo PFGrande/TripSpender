@@ -11,7 +11,9 @@ import SwiftUI
 
 
 struct AddItemView: View {
-    var tripId: String
+    var trip: TripInfo
+    
+//    var tripId: String
     @State
     var itemSubmitted: Bool = false
     @State
@@ -59,9 +61,12 @@ struct AddItemView: View {
                 }
             }
             
-            HStack {
-                Toggle("Is this an required item?", isOn: $isRequiredItem)
+            if (fetchUserId() == trip.tripLeaderId) {
+                HStack {
+                    Toggle("Is this an required item?", isOn: $isRequiredItem)
+                }
             }
+            
             
             Button(
                 action: {
@@ -84,7 +89,13 @@ struct AddItemView: View {
                        newItem.addedById = userId
                        newItem.contributorsIds.append(userId)
                        
-                       newItem.postTripItem(tripId: tripId)
+                       if (!newItem.canBeDeleted) {
+                           for member in trip.contributorIds.dropFirst() {
+                               newItem.contributorsIds.append(member)
+                           }
+                       }
+                       
+                       newItem.postTripItem(tripId: trip.id)
                        
                        // Handle the item addition logic
                        print("Item added: \(itemName) - $\(itemPrice)")

@@ -187,6 +187,7 @@ struct TripsView: View {
                     VStack {
                         Text(trip.destination)
                             .font(.headline)
+                        
                         Text("Leader: \(trip.tripLeaderId)")
                             .font(.subheadline)
                             .foregroundColor(.gray)

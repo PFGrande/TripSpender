@@ -65,7 +65,7 @@ struct DetailTripView: View {
                     .cornerRadius(10)
             }
             .sheet(isPresented: $isAddingItem) {
-                AddItemView(tripId: trip.id, isPresented: $isAddingItem)
+                AddItemView(trip: trip, isPresented: $isAddingItem)
             } // after an item is added the list does NOT
             // auto-refresh...
             
@@ -86,6 +86,14 @@ struct DetailTripView: View {
             }
             
             renderItems()
+            
+            HStack {
+                Text("Your Total Share: ")
+                    .fontWeight(.heavy)
+                Spacer()
+                Text(String(format: "$%.2f", trip.totalTripPrice(itemsList: items, userId: fetchUserId())))
+                
+            }
 
         }
         .padding()
@@ -109,9 +117,10 @@ struct DetailTripView: View {
             
 //            var itemText = Text(item.name)
             HStack {
-                Text(item.name)
+                Text("\(item.name)")
+//                Spacer().frame(width: 20)
                 Spacer()
-                Text(String(format: "$%.2f", item.price))
+                Text(String(format: "$%.2f / \(item.contributorsIds.count)", item.price))
             }
                 .foregroundColor(item.canBeDeleted ? .blue : .red)
                 .listRowBackground(item.contributorsIds.contains(fetchUserId()) ? Color.white : Color.gray)

@@ -127,6 +127,7 @@ struct CreateTripView: View {
             if (!contributorIds.contains(docId)) {
                 contributorIds.append(docId)
                 print("APPENDED \(docId)")
+                errorMessage = ""
             } else {
                 errorMessage = "user has already been added"
             }

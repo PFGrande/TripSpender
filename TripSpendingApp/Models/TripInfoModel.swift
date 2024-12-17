@@ -214,6 +214,22 @@ struct TripInfo: Identifiable, Equatable, Hashable { // removing codeable may ca
         }
     }
     
+    public func totalTripPrice(itemsList: [TripItem], userId: String) -> Double {
+        
+        var totalPrice: Double = 0.0
+        for item in itemsList {
+            if item.contributorsIds.contains(userId) {
+                var priceDividedAmongUsers = (item.price / Double(item.contributorsIds.count))
+                priceDividedAmongUsers = (priceDividedAmongUsers * 100).rounded() / 100
+                
+                totalPrice = priceDividedAmongUsers + totalPrice
+            }
+            
+            
+        }
+        return totalPrice
+    }
+    
     
     
     // write a function that just returns the contribuor id array's length to count members and divide the price among them
