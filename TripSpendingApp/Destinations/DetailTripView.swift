@@ -143,7 +143,7 @@ struct DetailTripView: View {
                         }
                     }
                     
-                    if (item.contributorsIds.contains(fetchUserId())) {
+                    if (item.contributorsIds.contains(fetchUserId()) && item.addedById != fetchUserId()) {
                         Button(action: {
                             print("opt-out \(item.name)")
                             Task {
@@ -153,7 +153,7 @@ struct DetailTripView: View {
                         }) {
                             Label("opt-out", systemImage: "person.fill.badge.minus")
                         }
-                    } else {
+                    } else if (!item.contributorsIds.contains(fetchUserId())) {
                         Button(action: {
                             Task {
                                 await trip.userOptIn(itemId: item.id, newMemberId: fetchUserId())
