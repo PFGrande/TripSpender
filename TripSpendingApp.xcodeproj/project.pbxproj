@@ -8,12 +8,41 @@
 
 /* Begin PBXBuildFile section */
 		EB45E4192D0BCA5100E14654 /* TripSpendingAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E4182D0BCA5100E14654 /* TripSpendingAppApp.swift */; };
-		EB45E41B2D0BCA5100E14654 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E41A2D0BCA5100E14654 /* ContentView.swift */; };
+		EB45E41B2D0BCA5100E14654 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E41A2D0BCA5100E14654 /* HomeView.swift */; };
 		EB45E41D2D0BCA5300E14654 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB45E41C2D0BCA5300E14654 /* Assets.xcassets */; };
 		EB45E4202D0BCA5300E14654 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB45E41F2D0BCA5300E14654 /* Preview Assets.xcassets */; };
 		EB45E42A2D0BCA5300E14654 /* TripSpendingAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E4292D0BCA5300E14654 /* TripSpendingAppTests.swift */; };
 		EB45E4342D0BCA5300E14654 /* TripSpendingAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E4332D0BCA5300E14654 /* TripSpendingAppUITests.swift */; };
 		EB45E4362D0BCA5300E14654 /* TripSpendingAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E4352D0BCA5300E14654 /* TripSpendingAppUITestsLaunchTests.swift */; };
+		EB45E4492D0C370500E14654 /* TripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E4482D0C370500E14654 /* TripsView.swift */; };
+		EB45E44B2D0C44F700E14654 /* DetailTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E44A2D0C44F700E14654 /* DetailTripView.swift */; };
+		EB45E44D2D0C454600E14654 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E44C2D0C454500E14654 /* AddItemView.swift */; };
+		EB45E44F2D0C455C00E14654 /* CreateTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E44E2D0C455C00E14654 /* CreateTripView.swift */; };
+		EB45E4512D0C4E8600E14654 /* TripInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E4502D0C4E8600E14654 /* TripInfoModel.swift */; };
+		EB45E4532D0C4F9D00E14654 /* TripItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E4522D0C4F9D00E14654 /* TripItemModel.swift */; };
+		EB45E4552D0C4FDF00E14654 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E4542D0C4FDF00E14654 /* UserModel.swift */; };
+		EB45E4572D0CA9B600E14654 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB45E4562D0CA9B600E14654 /* GoogleService-Info.plist */; };
+		EB45E4582D0CA9B600E14654 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB45E4562D0CA9B600E14654 /* GoogleService-Info.plist */; };
+		EB45E4592D0CA9B600E14654 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB45E4562D0CA9B600E14654 /* GoogleService-Info.plist */; };
+		EB45E45D2D0CF2D300E14654 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = EB45E45C2D0CF2D300E14654 /* FirebaseAnalytics */; };
+		EB45E45F2D0CF2D300E14654 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EB45E45E2D0CF2D300E14654 /* FirebaseAuth */; };
+		EB45E4612D0CF2D300E14654 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = EB45E4602D0CF2D300E14654 /* FirebaseCrashlytics */; };
+		EB45E4632D0CF2D300E14654 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EB45E4622D0CF2D300E14654 /* FirebaseFirestore */; };
+		EB45E4652D0CF2D300E14654 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = EB45E4642D0CF2D300E14654 /* FirebaseMessaging */; };
+		EB45E4672D0CF2D300E14654 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EB45E4662D0CF2D300E14654 /* FirebaseStorage */; };
+		EB45E46D2D0CFA5200E14654 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = EB45E46C2D0CFA5200E14654 /* .gitignore */; };
+		EB45E46E2D0CFA5200E14654 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = EB45E46C2D0CFA5200E14654 /* .gitignore */; };
+		EB45E46F2D0CFA5200E14654 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = EB45E46C2D0CFA5200E14654 /* .gitignore */; };
+		EB45E4712D0D007100E14654 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E4702D0D007100E14654 /* RegistrationView.swift */; };
+		EB45E4752D0D45DD00E14654 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E4742D0D45DD00E14654 /* LoginView.swift */; };
+		EB45E4792D0D720100E14654 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E4782D0D720100E14654 /* ContentView.swift */; };
+		EB45E47A2D0D720100E14654 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E4782D0D720100E14654 /* ContentView.swift */; };
+		EB45E47B2D0D720100E14654 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E4782D0D720100E14654 /* ContentView.swift */; };
+		EB45E47D2D0D738200E14654 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E47C2D0D738200E14654 /* Route.swift */; };
+		EB45E47E2D0D738200E14654 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E47C2D0D738200E14654 /* Route.swift */; };
+		EB45E47F2D0D738200E14654 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45E47C2D0D738200E14654 /* Route.swift */; };
+		EBCE4FAF2D11AD8000D1AA3B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EBCE4FAE2D11AD8000D1AA3B /* README.md */; };
+		EBCE4FB22D11B4B700D1AA3B /* wireframe1.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCE4FB12D11B4B700D1AA3B /* wireframe1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +65,7 @@
 /* Begin PBXFileReference section */
 		EB45E4152D0BCA5100E14654 /* TripSpendingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TripSpendingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB45E4182D0BCA5100E14654 /* TripSpendingAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripSpendingAppApp.swift; sourceTree = "<group>"; };
-		EB45E41A2D0BCA5100E14654 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		EB45E41A2D0BCA5100E14654 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EB45E41C2D0BCA5300E14654 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB45E41F2D0BCA5300E14654 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EB45E4252D0BCA5300E14654 /* TripSpendingAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TripSpendingAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +73,21 @@
 		EB45E42F2D0BCA5300E14654 /* TripSpendingAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TripSpendingAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB45E4332D0BCA5300E14654 /* TripSpendingAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripSpendingAppUITests.swift; sourceTree = "<group>"; };
 		EB45E4352D0BCA5300E14654 /* TripSpendingAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripSpendingAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		EB45E4482D0C370500E14654 /* TripsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsView.swift; sourceTree = "<group>"; };
+		EB45E44A2D0C44F700E14654 /* DetailTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTripView.swift; sourceTree = "<group>"; };
+		EB45E44C2D0C454500E14654 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
+		EB45E44E2D0C455C00E14654 /* CreateTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripView.swift; sourceTree = "<group>"; };
+		EB45E4502D0C4E8600E14654 /* TripInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInfoModel.swift; sourceTree = "<group>"; };
+		EB45E4522D0C4F9D00E14654 /* TripItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripItemModel.swift; sourceTree = "<group>"; };
+		EB45E4542D0C4FDF00E14654 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		EB45E4562D0CA9B600E14654 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EB45E46C2D0CFA5200E14654 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		EB45E4702D0D007100E14654 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		EB45E4742D0D45DD00E14654 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		EB45E4782D0D720100E14654 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		EB45E47C2D0D738200E14654 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		EBCE4FAE2D11AD8000D1AA3B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EBCE4FB12D11B4B700D1AA3B /* wireframe1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wireframe1.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +95,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB45E4612D0CF2D300E14654 /* FirebaseCrashlytics in Frameworks */,
+				EB45E4632D0CF2D300E14654 /* FirebaseFirestore in Frameworks */,
+				EB45E4652D0CF2D300E14654 /* FirebaseMessaging in Frameworks */,
+				EB45E45D2D0CF2D300E14654 /* FirebaseAnalytics in Frameworks */,
+				EB45E45F2D0CF2D300E14654 /* FirebaseAuth in Frameworks */,
+				EB45E4672D0CF2D300E14654 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,10 +144,17 @@
 		EB45E4172D0BCA5100E14654 /* TripSpendingApp */ = {
 			isa = PBXGroup;
 			children = (
+				EBCE4FB02D11B49800D1AA3B /* Wireframe */,
+				EB45E47C2D0D738200E14654 /* Route.swift */,
 				EB45E4182D0BCA5100E14654 /* TripSpendingAppApp.swift */,
-				EB45E41A2D0BCA5100E14654 /* ContentView.swift */,
+				EB45E4782D0D720100E14654 /* ContentView.swift */,
+				EB45E4562D0CA9B600E14654 /* GoogleService-Info.plist */,
+				EB45E4812D0E8A5200E14654 /* Destinations */,
+				EB45E4802D0E896800E14654 /* Models */,
 				EB45E41C2D0BCA5300E14654 /* Assets.xcassets */,
 				EB45E41E2D0BCA5300E14654 /* Preview Content */,
+				EB45E46C2D0CFA5200E14654 /* .gitignore */,
+				EBCE4FAE2D11AD8000D1AA3B /* README.md */,
 			);
 			path = TripSpendingApp;
 			sourceTree = "<group>";
@@ -127,6 +184,38 @@
 			path = TripSpendingAppUITests;
 			sourceTree = "<group>";
 		};
+		EB45E4802D0E896800E14654 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EB45E4542D0C4FDF00E14654 /* UserModel.swift */,
+				EB45E4522D0C4F9D00E14654 /* TripItemModel.swift */,
+				EB45E4502D0C4E8600E14654 /* TripInfoModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EB45E4812D0E8A5200E14654 /* Destinations */ = {
+			isa = PBXGroup;
+			children = (
+				EB45E4702D0D007100E14654 /* RegistrationView.swift */,
+				EB45E4742D0D45DD00E14654 /* LoginView.swift */,
+				EB45E41A2D0BCA5100E14654 /* HomeView.swift */,
+				EB45E4482D0C370500E14654 /* TripsView.swift */,
+				EB45E44E2D0C455C00E14654 /* CreateTripView.swift */,
+				EB45E44A2D0C44F700E14654 /* DetailTripView.swift */,
+				EB45E44C2D0C454500E14654 /* AddItemView.swift */,
+			);
+			path = Destinations;
+			sourceTree = "<group>";
+		};
+		EBCE4FB02D11B49800D1AA3B /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+				EBCE4FB12D11B4B700D1AA3B /* wireframe1.png */,
+			);
+			path = Wireframe;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +232,14 @@
 			dependencies = (
 			);
 			name = TripSpendingApp;
+			packageProductDependencies = (
+				EB45E45C2D0CF2D300E14654 /* FirebaseAnalytics */,
+				EB45E45E2D0CF2D300E14654 /* FirebaseAuth */,
+				EB45E4602D0CF2D300E14654 /* FirebaseCrashlytics */,
+				EB45E4622D0CF2D300E14654 /* FirebaseFirestore */,
+				EB45E4642D0CF2D300E14654 /* FirebaseMessaging */,
+				EB45E4662D0CF2D300E14654 /* FirebaseStorage */,
+			);
 			productName = TripSpendingApp;
 			productReference = EB45E4152D0BCA5100E14654 /* TripSpendingApp.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +312,9 @@
 				Base,
 			);
 			mainGroup = EB45E40C2D0BCA5100E14654;
+			packageReferences = (
+				EB45E45B2D0CF2D300E14654 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = EB45E4162D0BCA5100E14654 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -231,8 +331,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB45E46D2D0CFA5200E14654 /* .gitignore in Resources */,
 				EB45E4202D0BCA5300E14654 /* Preview Assets.xcassets in Resources */,
+				EBCE4FB22D11B4B700D1AA3B /* wireframe1.png in Resources */,
+				EBCE4FAF2D11AD8000D1AA3B /* README.md in Resources */,
 				EB45E41D2D0BCA5300E14654 /* Assets.xcassets in Resources */,
+				EB45E4572D0CA9B600E14654 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +344,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB45E46E2D0CFA5200E14654 /* .gitignore in Resources */,
+				EB45E4582D0CA9B600E14654 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +353,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB45E46F2D0CFA5200E14654 /* .gitignore in Resources */,
+				EB45E4592D0CA9B600E14654 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,8 +365,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB45E41B2D0BCA5100E14654 /* ContentView.swift in Sources */,
+				EB45E44B2D0C44F700E14654 /* DetailTripView.swift in Sources */,
+				EB45E4492D0C370500E14654 /* TripsView.swift in Sources */,
+				EB45E4792D0D720100E14654 /* ContentView.swift in Sources */,
+				EB45E41B2D0BCA5100E14654 /* HomeView.swift in Sources */,
+				EB45E47D2D0D738200E14654 /* Route.swift in Sources */,
+				EB45E44F2D0C455C00E14654 /* CreateTripView.swift in Sources */,
 				EB45E4192D0BCA5100E14654 /* TripSpendingAppApp.swift in Sources */,
+				EB45E4552D0C4FDF00E14654 /* UserModel.swift in Sources */,
+				EB45E4512D0C4E8600E14654 /* TripInfoModel.swift in Sources */,
+				EB45E44D2D0C454600E14654 /* AddItemView.swift in Sources */,
+				EB45E4752D0D45DD00E14654 /* LoginView.swift in Sources */,
+				EB45E4532D0C4F9D00E14654 /* TripItemModel.swift in Sources */,
+				EB45E4712D0D007100E14654 /* RegistrationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +386,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB45E42A2D0BCA5300E14654 /* TripSpendingAppTests.swift in Sources */,
+				EB45E47A2D0D720100E14654 /* ContentView.swift in Sources */,
+				EB45E47E2D0D738200E14654 /* Route.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +395,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB45E47B2D0D720100E14654 /* ContentView.swift in Sources */,
 				EB45E4342D0BCA5300E14654 /* TripSpendingAppUITests.swift in Sources */,
+				EB45E47F2D0D738200E14654 /* Route.swift in Sources */,
 				EB45E4362D0BCA5300E14654 /* TripSpendingAppUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -577,6 +700,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EB45E45B2D0CF2D300E14654 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = versionRange;
+				maximumVersion = 11.0.0;
+				minimumVersion = 10.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EB45E45C2D0CF2D300E14654 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB45E45B2D0CF2D300E14654 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		EB45E45E2D0CF2D300E14654 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB45E45B2D0CF2D300E14654 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		EB45E4602D0CF2D300E14654 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB45E45B2D0CF2D300E14654 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		EB45E4622D0CF2D300E14654 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB45E45B2D0CF2D300E14654 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		EB45E4642D0CF2D300E14654 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB45E45B2D0CF2D300E14654 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		EB45E4662D0CF2D300E14654 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EB45E45B2D0CF2D300E14654 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EB45E40D2D0BCA5100E14654 /* Project object */;
 }
