@@ -121,9 +121,37 @@ struct DetailTripView: View {
 //    }
     
     func renderItems() -> some View {
-
+        
+        // added binding
         List(items) { item in
-            Text(item.name)
+            
+//            var itemText = Text(item.name)
+            if (item.canBeDeleted) {
+                Text(item.name)
+                    .foregroundColor(.blue)
+                    .listRowBackground(item.contributorsIds.contains(fetchUserId()) ? Color.white : Color.gray)
+                    .onLongPressGesture {
+                        print("long pressed")
+                        // here display if a user can remove an item from the lsit.
+                        // to delete an item the user must be the owner of the trip or the item
+                        
+                        
+                    }
+            }
+            if (!item.canBeDeleted) {
+                Text(item.name)
+                    .foregroundColor(.gray)
+                    .listRowBackground(item.contributorsIds.contains(fetchUserId()) ? Color.white : Color.gray)
+            }
+            
+            
+            
+//            if (item.contributorsIds.contains(fetchUserId())) {
+//                Text(item.name).listRowBackground(.gray)
+//            } else {
+//                Text(item.name).listRowBackground(.white)
+//            }
+                
 
         }.onAppear() {
             itemFetchTask = Task {
