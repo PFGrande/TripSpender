@@ -124,6 +124,7 @@
 		EB45E40C2D0BCA5100E14654 = {
 			isa = PBXGroup;
 			children = (
+				EBCE4FAE2D11AD8000D1AA3B /* README.md */,
 				EB45E4172D0BCA5100E14654 /* TripSpendingApp */,
 				EB45E4282D0BCA5300E14654 /* TripSpendingAppTests */,
 				EB45E4322D0BCA5300E14654 /* TripSpendingAppUITests */,
@@ -154,7 +155,6 @@
 				EB45E41C2D0BCA5300E14654 /* Assets.xcassets */,
 				EB45E41E2D0BCA5300E14654 /* Preview Content */,
 				EB45E46C2D0CFA5200E14654 /* .gitignore */,
-				EBCE4FAE2D11AD8000D1AA3B /* README.md */,
 			);
 			path = TripSpendingApp;
 			sourceTree = "<group>";

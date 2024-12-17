@@ -30,5 +30,9 @@ I wish to add a feature that once all users have finished choosing what items th
 - Owner of a list may delete required items uploaded 
 
 # Wireframes (very rough sorry):
-![A wireframe, hopefully it shows up][./Wireframe/wireframe1.png]
+![A wireframe, hopefully it shows up][TripSpendingApp/Wireframe/wireframe1.png]
 
+# Testing:
+Please test with at least 2 accounts to see how a lot of these features work. The app is meant to be used by multiple people to calculate how much money they are due after a trip.
+
+# Thanks for reading have fun :)
