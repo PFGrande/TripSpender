@@ -153,6 +153,7 @@ struct DetailTripView: View {
                         Button(action: {
                             Task {
                                 await trip.userOptIn(itemId: item.id, newMemberId: fetchUserId())
+                                items = await trip.fetchItems()
                             }
                             print("opt-in \(item.name)")
                         }) {
