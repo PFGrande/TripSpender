@@ -130,9 +130,12 @@ struct TripInfo: Identifiable, Equatable, Hashable { // removing codeable may ca
     // of paying for items on a trip
     
     public func userOptIn(itemId: String, newMemberId: String) async {
+        print("USEROPIN FUNCTION CALL")
         let itemRef = await fetchItemRef(itemId: itemId)
         var tripItem: TripItem = await getItemFromRef(itemId: itemId, itemRef: itemRef)!
         tripItem.contributorsIds.append(newMemberId)
+        print("OPTING IN FOR \(tripItem.name)")
+        print("UPDATED CONTRIBUTORS IDS: \(tripItem.contributorsIds)")
         
         updateItem(updatedItem: tripItem, itemRef: itemRef)
         

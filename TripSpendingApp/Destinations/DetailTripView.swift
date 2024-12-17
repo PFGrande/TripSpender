@@ -151,6 +151,9 @@ struct DetailTripView: View {
                         }
                     } else {
                         Button(action: {
+                            Task {
+                                await trip.userOptIn(itemId: item.id, newMemberId: fetchUserId())
+                            }
                             print("opt-in \(item.name)")
                         }) {
                             Label("opt-in", systemImage: "person.fill.badge.plus")
