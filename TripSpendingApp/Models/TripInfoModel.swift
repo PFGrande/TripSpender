@@ -130,25 +130,38 @@ struct TripInfo: Identifiable, Equatable, Hashable { // removing codeable may ca
     // of paying for items on a trip
     
     public func userOptIn(itemId: String, newMemberId: String) async {
-        var tripItem: TripItem = await fetchItem(itemId: itemId)!
+        let itemRef = await fetchItemRef(itemId: itemId)
+        var tripItem: TripItem = await getItemFromRef(itemId: itemId, itemRef: itemRef)!
         tripItem.contributorsIds.append(newMemberId)
         
-        updateItem(updatedItem: tripItem)
+        updateItem(updatedItem: tripItem, itemRef: itemRef)
+        
+    }
+    public func userOptOut(itemId: String, memberId: String) async {
+        let itemRef = await fetchItemRef(itemId: itemId)
+        var tripItem: TripItem = await getItemFromRef(itemId: itemId, itemRef: itemRef)!
+        
+        // remove old memberid
+        if tripItem.contributorsIds.contains(memberId) {
+            tripItem.contributorsIds.removeAll {
+                $0 == memberId
+            }
+            
+            updateItem(updatedItem: tripItem, itemRef: itemRef)
+        }
         
     }
     
-    public func fetchItem(itemId: String) async -> TripItem? {
-        
-        let db = Firestore.firestore()
+    public func getItemFromRef(itemId: String, itemRef: DocumentReference) async -> TripItem? {
         
         do {
-            let itemRef = try await db.collection("TripInfo").document(self.id).collection("TripItem").document(itemId).getDocument()
+            let itemSnapshot = try await fetchItemRef(itemId: itemId).getDocument()
             
-            if itemRef.exists {
+            if itemSnapshot.exists {
                 var tripItem = TripItem()
-                let data = itemRef
-
-                tripItem.id = itemRef.documentID
+                let data = itemSnapshot
+                
+                tripItem.id = itemSnapshot.documentID
                 print("fetchItems() doc id: \(tripItem.id)")
                 tripItem.name = data["name"] as? String ?? "???"
                 tripItem.price = data["price"] as? Double ?? 0.00
@@ -157,19 +170,57 @@ struct TripInfo: Identifiable, Equatable, Hashable { // removing codeable may ca
                 tripItem.canBeDeleted = data["canBeDeleted"] as? Bool ?? false
                 tripItem.contributorsIds = data["contributorsIds"] as? [String] ?? []
                 
-                
-                
                 return tripItem
             }
+        }
+        
+        catch {
+            print("error")
             return nil
-        } catch {
-            print("failed to fetch item")
         }
         return nil
         
     }
     
-    public func updateItem(updatedItem: TripItem) {
+    public func fetchItemRef(itemId: String) async -> DocumentReference {
+        
+        let db = Firestore.firestore()
+        
+//        do {
+            let itemRef = db.collection("TripInfo").document(self.id).collection("TripItem").document(itemId) //.getDocument()
+            
+            return itemRef
+//            if itemRef.exists {
+//                var tripItem = TripItem()
+//                let data = itemRef
+//
+//                tripItem.id = itemRef.documentID
+//                print("fetchItems() doc id: \(tripItem.id)")
+//                tripItem.name = data["name"] as? String ?? "???"
+//                tripItem.price = data["price"] as? Double ?? 0.00
+//                tripItem.quantity = data["quanity"] as? Int ?? 1
+//                tripItem.addedById = data["addedById"] as? String ?? "???"
+//                tripItem.canBeDeleted = data["canBeDeleted"] as? Bool ?? false
+//                tripItem.contributorsIds = data["contributorsIds"] as? [String] ?? []
+//
+//
+//
+//                return tripItem
+//            }
+//            return nil
+//        } catch {
+//            print("failed to fetch item")
+//        }
+//        return nil
+        
+    }
+    
+    
+    // there is a firebase function to update items, look into it
+    public func updateItem(updatedItem: TripItem, itemRef: DocumentReference) {
+        itemRef.updateData([
+            "contributorsIds": updatedItem.contributorsIds
+        ])
         
     }
     
