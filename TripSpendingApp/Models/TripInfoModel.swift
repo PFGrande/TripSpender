@@ -86,6 +86,43 @@ struct TripInfo: Identifiable, Equatable, Hashable { // removing codeable may ca
         return lhs.id == rhs.id
     }
     
+    func fetchItems() async -> [TripItem] {
+        var items: [TripItem] = []
+        
+        
+        do {
+            let db = Firestore.firestore()
+            
+            let tripsRef = try await db.collection("TripInfo").document(self.id).collection("TripItem").getDocuments()
+            
+            for doc in tripsRef.documents {
+                let data = doc.data()
+                var tripItem = TripItem()
+                
+                tripItem.name = data["name"] as? String ?? "???"
+                tripItem.price = data["price"] as? Double ?? 0.00
+                tripItem.quantity = data["quanity"] as? Int ?? 1
+                tripItem.addedById = data["addedById"] as? String ?? "???"
+                tripItem.canBeDeleted = data["canBeDeleted"] as? Bool ?? false
+                tripItem.contributorsIds = data["contributorsIds"] as? [String] ?? []
+                
+                items.append(tripItem)
+            }
+            
+                
+                
+                
+                
+            } catch {
+                print("error fetching items")
+            }
+        
+        
+        
+        
+        return items
+    }
+    
 //    func addContributor() {
 //        add logic to append user to the list, happens at trip creation
 //    }
