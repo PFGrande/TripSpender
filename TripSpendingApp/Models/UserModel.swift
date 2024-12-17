@@ -68,6 +68,8 @@ func fetchUserId() -> String {
 }
 
 func sessiontStatus() -> FirebaseAuth.User? {
+    print("SESSION STATUS:")
+    print(Auth.auth().currentUser == nil)
     return Auth.auth().currentUser
 }
 

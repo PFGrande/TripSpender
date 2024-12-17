@@ -17,11 +17,15 @@
 import Foundation
 
 import SwiftUI
+import FirebaseAuth
 
 // code from lecture https://www.youtube.com/watch?v=g4HoFkd_I2Q&list=PLPNCkYpwTr1SKK8zrqRBJC71c4MO9yTIM&index=10
 struct HomeView: View {
     
     var onNavigation: (Route) -> Void
+    
+    @State
+    var loginStatus: Bool = sessiontStatus() != nil
     
     var body: some View {
         VStack {
@@ -46,12 +50,21 @@ struct HomeView: View {
                 })
 
                 // no login needed
-                Button(action: {
-                    onNavigation(.tripsview)
-                }, label: {
-                    renderHomeMenuButtonText(color: Color.red, text: "Offline Mode")
-                })
-
+                if (loginStatus) {
+                    Button(action: {
+                        onNavigation(.tripsview)
+                    }, label: {
+                        renderHomeMenuButtonText(color: Color.red, text: "Proceed to Trips")
+                    })
+                    
+                    Button(action: {
+                        logOut()
+                        loginStatus = sessiontStatus() != nil
+                    }, label: {
+                        Text("log out")
+                    }
+                    )
+                }
             }
 
             HStack {
@@ -64,8 +77,6 @@ struct HomeView: View {
                     .aspectRatio(contentMode: .fit)
             }
             .frame(height: 200)
-        }.onAppear() {
-            logOut()
         }
     }
 }
