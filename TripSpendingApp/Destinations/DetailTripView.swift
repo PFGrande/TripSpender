@@ -134,15 +134,42 @@ struct DetailTripView: View {
                         print("long pressed")
                         // here display if a user can remove an item from the lsit.
                         // to delete an item the user must be the owner of the trip or the item
+                    }
+                    .contextMenu {
+                        if (item.addedById == fetchUserId()) {
+                            Button(action: {
+                                print("delete \(item.name)")
+                            }) {
+                                Label("delete", systemImage: "trash.square.fill")
+                            }
+                        }
                         
+                        if (item.contributorsIds.contains(fetchUserId())) {
+                            Button(action: {
+                                print("opt-out \(item.name)")
+                            }) {
+                                Label("opt-out", systemImage: "person.fill.badge.minus")
+                            }
+                        } else {
+                            Button(action: {
+                                print("opt-in \(item.name)")
+                            }) {
+                                Label("opt-in", systemImage: "person.fill.badge.plus")
+                            }
+                        }
                         
                     }
+                
+                
+                
             }
             if (!item.canBeDeleted) {
                 Text(item.name)
                     .foregroundColor(.gray)
                     .listRowBackground(item.contributorsIds.contains(fetchUserId()) ? Color.white : Color.gray)
             }
+            
+            
             
             
             
