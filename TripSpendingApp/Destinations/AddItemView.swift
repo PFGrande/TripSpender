@@ -31,34 +31,56 @@ struct AddItemView: View {
     
     var body: some View {
         VStack {
+            Text("Add Item")
+                .font(Font.system(size: 35))
+                .padding(.bottom, 45)
+                .bold()
+            // formatting for price field
+            HStack {
+                Text("$")
+                    .font(Font.system(size: 100))
+                Spacer(minLength: 3)
+                TextField("0", text: $itemPriceString)
+                    .keyboardType(.decimalPad)
+                    .onChange(of: itemPriceString) { newValue in
+                        
+                        
+                        // make it so that . is always 2 spaces away from the end
+                        if (newValue.count > 3) {
+//                                var endingIndex = newValue.index(newValue.endIndex, offsetBy: -2)
+                            if let periodIndex = itemPriceString.firstIndex(of: ".") {
+                                itemPriceString.remove(at: periodIndex)
+                            }
+                            
+                            let endingIndex = newValue.index(newValue.endIndex, offsetBy: -3)
+                            itemPriceString.insert(".", at: endingIndex)
+                            
+                        }
+                        
+
+                    }
+                    .font(Font.system(size: 70))
+                    .fontWeight(.heavy)
+                    .textFieldStyle(.roundedBorder)
+//                    .frame(height: 50)
+                    .padding(.top, 12)
+//                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(8)
+//                    .frame(minHeight: 100)
+//                    .underline()
+            }
+            
+            
+            
+            
             HStack {
                 TextField("Item Name", text: $itemName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                // formatting for price field
-                HStack {
-                    Text("$")
-                    TextField("Price", text: $itemPriceString)
-                        .keyboardType(.decimalPad)
-                        .onChange(of: itemPriceString) { newValue in
-                            
-                            
-                            // make it so that . is always 2 spaces away from the end
-                            if (newValue.count > 3) {
-//                                var endingIndex = newValue.index(newValue.endIndex, offsetBy: -2)
-                                if let periodIndex = itemPriceString.firstIndex(of: ".") {
-                                    itemPriceString.remove(at: periodIndex)
-                                }
-                                
-                                let endingIndex = newValue.index(newValue.endIndex, offsetBy: -3)
-                                itemPriceString.insert(".", at: endingIndex)
-                                
-                            }
-                            
+                    .padding(.top, 10)
+                    .font(Font.system(size: 30))
+                    .frame(width: 170)
+                    .padding(.bottom, 30)
 
-                        }
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                }
             }
             
             if (fetchUserId() == trip.tripLeaderId) {
