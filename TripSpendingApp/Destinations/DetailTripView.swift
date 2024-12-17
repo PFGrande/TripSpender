@@ -135,7 +135,7 @@ struct DetailTripView: View {
                         }
                     }
                     
-                    if (item.contributorsIds.contains(fetchUserId()) && item.addedById != fetchUserId()) {
+                    if (item.contributorsIds.contains(fetchUserId()) && item.addedById != fetchUserId()  && item.canBeDeleted) {
                         Button(action: {
                             print("opt-out \(item.name)")
                             Task {
@@ -145,7 +145,7 @@ struct DetailTripView: View {
                         }) {
                             Label("opt-out", systemImage: "person.fill.badge.minus")
                         }
-                    } else if (!item.contributorsIds.contains(fetchUserId())) {
+                    } else if (!item.contributorsIds.contains(fetchUserId()) && item.canBeDeleted) {
                         Button(action: {
                             Task {
                                 await trip.userOptIn(itemId: item.id, newMemberId: fetchUserId())

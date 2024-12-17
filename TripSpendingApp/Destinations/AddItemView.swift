@@ -24,6 +24,8 @@ struct AddItemView: View {
     var errorMessage: String = ""
     @Binding
     var isPresented: Bool
+    @State
+    var isRequiredItem: Bool = false
     
     var body: some View {
         VStack {
@@ -57,6 +59,9 @@ struct AddItemView: View {
                 }
             }
             
+            HStack {
+                Toggle("Is this an required item?", isOn: $isRequiredItem)
+            }
             
             Button(
                 action: {
@@ -75,7 +80,7 @@ struct AddItemView: View {
                        
                        newItem.name = itemName
                        newItem.price = itemPrice
-                       newItem.canBeDeleted = true
+                       newItem.canBeDeleted = !isRequiredItem
                        newItem.addedById = userId
                        newItem.contributorsIds.append(userId)
                        
@@ -97,9 +102,8 @@ struct AddItemView: View {
                         .background(Color.blue)
                         .foregroundColor(.white)
                         .cornerRadius(10)
-                }
-                
-            )
+                })
+            
             if !errorMessage.isEmpty {
                 Text(errorMessage)
                     .foregroundColor(.red)
